@@ -1,0 +1,54 @@
+
+<div class="app-header">
+  <div class="app-header-wrap">
+    <div class="left_contens">
+      <div class="logo">
+        <img src="/img/logo.svg" alt=""/>
+      </div>
+  
+      <div class="tit">
+        AIRDROP
+      </div>
+    </div>
+  
+    <div class="right_contents">
+      <div class="menu_sec">
+        <a href="#">
+          <img src="/img/twitter.svg" alt=""/>
+        </a>
+  
+        <a href="#">
+          <img src="/img/telegram.svg" alt=""/>
+        </a>
+
+        <a href="#">
+          <img src="/img/discord.svg" alt=""/>
+        </a>
+
+        <a href="#">
+          <img src="/img/sns.svg" alt=""/>
+        </a>
+      </div>
+  
+      <div class="login_sec">
+        <% if(isLogin){ %>
+          <a  class="logout" href = "/users/logout">
+            LOGOUT
+          </a>
+  
+          <a  class="logout" onclick="checkAttendance()">
+            WHITEPAPER
+          </a>
+        <% } else { %>
+          <a onclick="singMetamask()">
+            LOGIN
+          </a>
+        <% } %> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

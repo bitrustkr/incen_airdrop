@@ -1,1 +1,1 @@
-# incen_airdrop
+# bsu_airdrop

@@ -1,0 +1,42 @@
+<html>
+
+<head>
+  <title>Discord</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+  <h1>Metamask</h1>
+  <h1><%= isLogin %></h1>
+  <a href = "javascript:test();">log in</a><br/>
+  <a href = "/users/logout">log out</a><br/>
+  <br/>
+  <br/>
+  <a href = "javascript:getMissions();">get missions</a><br/>
+  <a href = "javascript:repeatComplete();">attendance clear</a><br/>
+  <br/>
+  <br/>
+  <a href = "javascript:nftHolder();">nft holder clear</a><br/>
+  <br/>
+  <br/>
+  <input type="text" id = "coupon" />
+  <a href = "javascript:coupon();">coupon code</a><br/>
+  <br/>
+  <br/>
+  <a href = "javascript:allClear();">all clear</a><br/>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- Web3 js -->
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethereumjs-util@7.1.5/dist.browser/index.min.js"></script>
+
+<script src="/javascripts/test.js"></script>
+  <script src="/javascripts/mission.js"></script>
+  <script src="/javascripts/wallet.js"></script>
+  <script src="/javascripts/metamask.js"></script>
+</body>
+
+</html>

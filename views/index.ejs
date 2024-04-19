@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta data -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Favicon-->
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+  <!-- Title -->
+  <title>INCEN AIRDROP</title>
+    
+    <!-- Style css -->
+    <link href="/css/style.css" rel="stylesheet" />     
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/header.css" rel="stylesheet" />
+    <link href="/css/footer.css" rel="stylesheet" />
+    <link href="/css/modal.css" rel="stylesheet" />
+</head>
+<body>
+    <%-include('common/daily.ejs')%>
+    <%-include('common/daily_check.ejs')%>
+    <%-include('common/confirm.ejs')%>
+    <%-include('common/notify.ejs')%>
+    <%-include('common/code.ejs')%>
+    <%-include('common/error.ejs')%>
+    <%-include('common/log_error.ejs')%>
+
+    <div class="body_back" data-value="<%= isLogin %>">
+        <%-include('common/header.ejs')%>
+
+        <div class="app_container_wrap">
+            <div class="app_content_wrap_border">
+                <div class="app_content_wrap">
+                    <%-include('contents/section1.ejs')%>
+
+                    <%-include('contents/section2.ejs')%>
+                </div>
+            </div>
+        </div>
+
+        <%-include('common/footer.ejs')%>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-url-parser/2.3.1/purl.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Web3 js -->
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
+<!-- modal script -->
+<script src="/javascripts/modal.js"></script>
+<script src="/javascripts/user.js"></script>
+<script src="/javascripts/mission.js"></script>
+
+</html>
