@@ -12,7 +12,7 @@
 
         <div class="usr_wrap">
             <div>
-                1234
+                <img src="/img/coin.png" alt=""/>
             </div>
         </div>
     </div>
@@ -23,16 +23,35 @@
             <span class="oncopy">copy</span>
         </div>
 
-        <div class="claim_btn">CLAIM</div>
+        <% if(isLogin){ %>
+            <div class="claim_btn">CLAIM</div>
+        <% } else { %>
+            <div class="login_btn">LOGIN</div>
+        <% } %> 
     </div>
 
     <div class="daily_wrap">
         <div class="daily_wrap_contents">
-            <% Array.from({ length: 10 }).forEach(function(_, i) { %>
-                <div>
-                    <div class="day">Day <%= i + 1 %></div>
-                    <div class="point">+ 1</div>
-                </div>
+            <% Array.from({ length: 7 }).forEach(function(_, i) { %>
+                <% if(i > 3){ %>
+                    <div class="disable">
+                        <img src="/img/day_back_non.svg" alt=""/>
+
+                        <div>
+                            <div class="day">Day <%= i + 1 %></div>
+                            <div class="point">+ 1</div>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="active">
+                        <img src="/img/day_back_active.svg" alt=""/>
+
+                        <div>
+                            <div class="point"> +<%= i + 1 %></div>
+                            <!-- <div class="point">+ 1</div> -->
+                        </div>
+                    </div>
+                <% } %> 
             <% }); %>
         </div>
     </div>

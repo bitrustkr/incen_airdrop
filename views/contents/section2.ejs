@@ -10,7 +10,11 @@
                         <div class="mission">Connect your Wallet</div>
                     </div>
 
-                    <div class="connect">CONNECT</div>
+                    <% if(isLogin){ %>
+                        <div class="connect">CONNECT</div>
+                    <% } else { %>
+                        <div></div>
+                    <% } %> 
                 </div>
             <% }); %>
         </div>

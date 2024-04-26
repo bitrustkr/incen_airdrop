@@ -1,6 +1,7 @@
 body{
 	overflow: auto;
 	background: #FFD543;
+    min-width: 1200px;
 }
 
 .app_container_wrap{
@@ -112,6 +113,16 @@ body{
     cursor: pointer;
 }
 
+.section1 .my_refer_wrap .login_btn {
+    background: #000000;
+    border: 3px solid #000000;
+    color:#FFD543;
+    border-radius: 5px;
+    font-family: 'GmarketSansBold';
+    text-align: center;
+    cursor: pointer;
+}
+
 .section1 .my_refer_wrap .claim_btn{
     background: #FFD543;
     border: 3px solid #FFD543;
@@ -129,9 +140,7 @@ body{
 .section1 .daily_wrap_contents{
     display: flex;
     align-items: center;
-    border: 3px solid #FFD543;
     border-radius: 5px;
-    overflow-x: scroll;
 }
 
 .section1 .daily_wrap_contents > div {
@@ -140,21 +149,40 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid #FFD543;
+    padding: 10px;
+}
+
+.section1 .daily_wrap_contents .active,
+.section1 .daily_wrap_contents .disable{
+    position: relative;
+}
+
+.section1 .daily_wrap_contents .active >div{
+    position: absolute;
+    left: 50%;
+    bottom: 15px;
+    transform: translateX(-50%);
+}
+
+.section1 .daily_wrap_contents .disable >div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .section1 .daily_wrap_contents > div > div {
     font-size: 20px;
 }
 
+.section1 .daily_wrap_contents .point{
+    font-family: 'GmarketSansBold';
+    text-align: center;
+}
+
 .section1 .daily_wrap_contents .day{
     font-family: 'GmarketSansMedieum';
     padding: 20px 10px 10px 10px;
-}
-
-.section1 .daily_wrap_contents .point{
-    font-family: 'GmarketSansBold';
-    padding: 10px 10px 20px 10px;
 }
 
 /* section2 */
@@ -222,6 +250,10 @@ body{
 }
 
 @media (max-width: 768px) {
+    body{
+        min-width: 100% ;
+    }
+
     .app_container_wrap{
         padding: 20px 0;
     }
@@ -241,6 +273,15 @@ body{
     .section1 .my_refer_wrap .refer,
     .section1 .my_refer_wrap .claim_btn{
         width: 100% !important;
+    }
+
+    .section1 .sction_main_wrap .usr_wrap {
+        /* display: none; */
+    }
+
+    .section1 .my_refer_wrap .login_btn{
+        width: 100% !important;
+        margin-top:10px;
     }
 
     .section1 .my_refer_wrap .claim_btn{
