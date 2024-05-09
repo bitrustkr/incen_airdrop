@@ -31,7 +31,7 @@
     </div>
 
     <div class="daily_wrap">
-        <div class="daily_wrap_contents">
+        <div class="daily_wrap_contents slideshow">
             <% Array.from({ length: 7 }).forEach(function(_, i) { %>
                 <% if(i > 3){ %>
                     <div class="disable">
@@ -49,6 +49,30 @@
                         <div>
                             <div class="point"> +<%= i + 1 %></div>
                             <!-- <div class="point">+ 1</div> -->
+                        </div>
+                    </div>
+                <% } %> 
+            <% }); %>
+        </div>
+
+        <div class="daily_wrap_contents">
+            <% Array.from({ length: 7 }).forEach(function(_, i) { %>
+                <% if(i > 3){ %>
+                    <div class="disable">
+                        <img src="/img/day_back_non.svg" alt=""/>
+
+                        <div>
+                            <div class="day">Day <%= i + 1 %></div>
+                            <div class="point">+ 1</div>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="active">
+                        <img src="/img/day_back_active.svg" alt=""/>
+
+                        <div>
+                            <div class="point"> +<%= i + 1 %></div>
+                            <div class="point">+ 1</div>
                         </div>
                     </div>
                 <% } %> 

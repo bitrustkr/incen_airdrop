@@ -1,0 +1,15 @@
+.slick-slide img {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .section1 .daily_wrap_contents > div {
+        width: 100%;
+    }
+
+    .section1 .daily_wrap {
+        padding: 20px 20px 0 20px;
+    }
+}
+
+

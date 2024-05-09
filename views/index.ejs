@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta data -->
-  <meta charset="UTF-8" />
-  <meta http-equiv="x-ua-compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Favicon-->
-  <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <!-- Meta data -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Favicon-->
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
 
-  <!-- Title -->
-  <title>INCEN AIRDROP</title>
-    
+    <!-- Title -->
+    <title>INCEN AIRDROP</title>
+
+    <!-- slide css -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+
     <!-- Style css -->
     <link href="/css/style.css" rel="stylesheet" />     
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/header.css" rel="stylesheet" />
     <link href="/css/footer.css" rel="stylesheet" />
     <link href="/css/modal.css" rel="stylesheet" />
+    <link href="/css/slide.css" rel="stylesheet" />
 </head>
+
 <body>
     <%-include('common/daily.ejs')%>
     <%-include('common/daily_check.ejs')%>
@@ -50,9 +56,13 @@
 <!-- Web3 js -->
 <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
+<!-- slide -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <!-- modal script -->
 <script src="/javascripts/modal.js"></script>
 <script src="/javascripts/user.js"></script>
 <script src="/javascripts/mission.js"></script>
+<script src="/javascripts/custom.js"></script>
 
 </html>
