@@ -12,42 +12,67 @@
     </div>
   
     <div class="right_contents">
-      <div class="menu_sec">
-        <a href="#">
-          <img src="/img/twitter.svg" alt=""/>
-        </a>
-  
-        <a href="#">
-          <img src="/img/telegram.svg" alt=""/>
-        </a>
-
-        <a href="#">
-          <img src="/img/discord.svg" alt=""/>
-        </a>
-
-        <a href="#">
-          <img src="/img/sns.svg" alt=""/>
-        </a>
-      </div>
-  
       <div class="login_sec">
         <% if(isLogin){ %>
-          <a  class="logout" href = "/users/logout">
-            LOGOUT
-          </a>
+          <div class="loginInfo">
+            <span class="info">user name</span>
+            
+            <span class="burger">
+              <img src="/img/burger.svg" alt="" />
+            </span>
   
-          <a  class="logout" onclick="checkAttendance()">
-            WHITEPAPER 
-          </a>
+            <span class="smile">
+              <img src="/img/smile.svg" alt="" />
+            </span>
+  
+            <div class="hide">
+              <div class="menu_sec">
+                <a href="#">
+                  <img src="/img/twitter.svg" alt=""/>
+                  user name
+                </a>
+          
+                <a href="#">
+                  <img src="/img/wallet.svg" alt=""/>
+                  Ox123...1234
+                </a>
+  
+                <a href="#">
+                  <img src="/img/telegram.svg" alt=""/>
+                  Ox123...1234
+                </a>
+        
+                <a href="#">
+                  <img src="/img/discord.svg" alt=""/>
+                  Ox123...1234
+                </a>
+              </div> 
+  
+              <div class="logout">
+                <div>
+                  My Referral : 00
+                </div>
+                <a  class="logout_btn" href = "/users/logout">
+                  DISCONNECT
+                </a>
+              </div>
+            </div>
+          </div>
         <% } else { %>
-          <a onclick="singMetamask()">
-            LOGIN
+          <a class="m_login" onclick="singMetamask()">
+            <img src="/img/m_login.svg" alt=""/>
+          </a>
+          
+          <a class="login" onclick="singMetamask()">
+            CONNECT to X
           </a>
         <% } %> 
       </div>
     </div>
   </div>
 </div>
+
+
 
 
 

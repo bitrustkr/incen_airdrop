@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    filter: drop-shadow(-1px 8px 4px #77777767);
 }
 
 .app-header .app-header-wrap {
@@ -48,7 +49,7 @@
    align-items: center;
 }
 
-.app-header .right_contents .menu_sec {
+/* .app-header .right_contents .menu_sec {
     display: flex;
     align-items: center;
 }
@@ -64,7 +65,7 @@
 
 .app-header .right_contents .menu_sec a > img{
     width: 100%;
-}
+} */
 
 .app-header .right_contents .login_sec {
     display: flex;
@@ -73,20 +74,108 @@
     height: 100%;
 }
 
-.app-header .right_contents .login_sec a{
+.app-header .right_contents .login_sec > a,
+.app-header .right_contents .login_sec .loginInfo{
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 150px;
-    min-width: 100px;
-    background: #000;
-    color:#fff;
+    width: 180px;
+    min-width: 170px;
+    background: #ffd527;
+    border:2px solid #000;
+    color:#000;
     border-radius: 30px;
     height: 40px;
+    font-weight: bold;
     cursor: pointer;
+    font-family: Inter;
+    line-height: 24.2px;
+    text-decoration: none;
+    user-select: none;
+}
+
+.app-header .right_contents .login_sec .loginInfo{
+    position:relative;
+}
+
+.app-header .right_contents .login_sec .loginInfo > .smile{
+    position:absolute;
+    right: -2px;
+    width: 40px;
+    height: 40px;
+}
+
+.app-header .hide{
+    display: none;
+    position: absolute;
+    bottom: -330px;
+    width: 100%;
+    background: #fff;
+    min-height: 100px;
+    border-radius: 2px;
+    border: 1px solid #ffd527;
+}
+
+.app-header .hide .menu_sec{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    border-bottom: 2px solid #ffd527;
+}
+
+.app-header .hide .menu_sec a{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 5px 5px 5px 15px;
+    border:1px solid #183EB0;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.app-header .hide .menu_sec a:hover{
+    background: #183EB0;
+    color:#FFF;
+}
+
+.app-header .hide .menu_sec a > img {
+    position: absolute;
+    left: 0;
+    width: 35px;
+    height: 35px;
+}
+
+.app-header .hide .logout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+    font-size: 15px;
+}
+
+.app-header .hide .logout_btn {
+    font-size: 15px;
+    color:#FF0000;
+    font-family: 'GmarketSansBold';
+    text-decoration: none;
+    margin-top:10px;
+}
+
+.app-header .m_login,
+.app-header .burger{
+    display: none !important;
 }
 
 @media (max-width: 540px) {
+    .app-header .app-header-wrap{
+        padding: 5px 10px;
+    }
+    
     .app-header .left_contens{
         flex-direction: column;
     }
@@ -100,16 +189,54 @@
         font-size: 15px;
     }
 
-    .app-header .right_contents .menu_sec a{
+    /* .app-header .right_contents .menu_sec a{
         width: 35px;
         height: 35px;
-    }
+    } */
 
-    .app-header .right_contents .login_sec a{
+    .app-header .right_contents .login_sec .loginInfo{
+        all: unset;
+        position: relative;
+        width: 180px;
+        min-width: 170px;
+        height: 40px;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+    
+    .app-header .right_contents .login_sec > a{
         max-width: 100%;
         min-width: 100%;
         height: 25px;
         font-size: 12px;
+        padding: 10px;
+    }
+
+    .app-header .m_login,
+    .app-header .burger{
+        all:unset !important;
+        display: flex !important;
+    }
+
+    .app-header .right_contents .login_sec .loginInfo > .burger{
+        position: absolute;
+        right: 0px !important;
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .app-header .login,
+    .loginInfo .info,
+    .loginInfo .smile{
+        display: none !important;
+    }
+    
+    .app-header .hide{
+        bottom: -300px;
+    }
+
+    .app-header .hide .menu_sec a{
         padding: 10px;
     }
 }

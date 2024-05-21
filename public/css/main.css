@@ -99,6 +99,20 @@ body{
     border:3px solid #FFD543;
     border-radius: 5px;
     position: relative;
+    padding: 10px 10px 10px 200px !important;
+}
+
+.section1 .my_refer_wrap .refer .code_tit{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: #FFD543;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .section1 .my_refer_wrap .refer .oncopy{
@@ -282,6 +296,26 @@ body{
 
     .section1 .sction_main_wrap .usr_wrap {
         /* display: none; */
+    }
+    
+    .section1 .my_refer_wrap .refer{
+        padding: 10px 0 10px 120px !important;
+        font-size: 12px;
+    }
+
+    .section1 .my_refer_wrap .refer .code_tit{
+        font-size: 10px;
+        font-family: 'GmarketSansBold';
+        padding: 0 8px;
+    }
+
+    .section1 .my_refer_wrap .refer .oncopy{
+        font-family: 'GmarketSansBold';
+        padding: 0 8px;
+        height: 85%;
+        right: 2px;
+        top: 2px;
+        border-radius: 3px;
     }
 
     .section1 .my_refer_wrap .login_btn{

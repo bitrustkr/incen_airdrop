@@ -15,4 +15,16 @@ $(document).ready(function(){
         }
       ]
     });
+
+    $(".loginInfo").click(function(){
+      var submenu = $('.hide');
+
+      if( submenu.is(":visible") ){
+          submenu.toggle();
+      }else{
+          submenu.toggle();
+      }
   });
+});
+
+ 
