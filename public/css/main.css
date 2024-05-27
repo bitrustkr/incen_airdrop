@@ -194,6 +194,11 @@ body{
     font-size: 20px;
 }
 
+.section1 .daily_wrap_contents .active >div{
+    bottom: -1px;
+    font-size: 8px;
+}
+
 .section1 .daily_wrap_contents .point{
     font-family: 'GmarketSansBold';
     text-align: center;
@@ -274,12 +279,17 @@ body{
     }
 
     .app_container_wrap{
-        padding: 20px 0;
+        padding: 20px;
     }
 
     .app_content_wrap_border, 
     .app_content_wrap{
         width: 100%;
+    }
+
+    .app_content_wrap_border{
+        border-radius: 5px;
+        border: 7px solid rgba(255, 255, 255, 0.5);
     }
 
     .section1 .sction_main_wrap,
@@ -328,7 +338,7 @@ body{
     }
 
     .section1 .sction_main_wrap .tit_wrap .logo{
-        width: 200px;
+        width: 100px;
     }
 
     .section1 .sction_main_wrap .tit_wrap .logo>img{
@@ -337,7 +347,8 @@ body{
 
     .section1 .tit_wrap .tit,
     .section1 .tit_wrap .sub_tit{
-        font-size: 20px;
+        font-size: 15px;
+        text-align: center;
     }
 
     .section1 .daily_wrap {
@@ -356,6 +367,21 @@ body{
         min-width: 100px;
     }
 
+    .section1 .daily_wrap_contents .day{
+        font-size: 8px;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .section1 .daily_wrap_contents .point{
+        font-size: 8px;
+        margin-top: 3px;
+    }
+
+    .section1 .daily_wrap_contents .disable >div{
+        width: 100%;
+    }
+
     .section2 .mission_list >div {
         flex-direction: column;
     }
@@ -367,6 +393,16 @@ body{
     .section2 .mission_list .connect{
         width: 100%;
         margin-top:10px;
+    }
+
+    .section2 .mission_wrap .tit{
+        font-size: 18px;
+        padding: 0;
+    }
+
+    .section2 .mission_list .poin,
+    .section2 .mission_list .left >div{
+        font-size: 10px;
     }
 }                
 

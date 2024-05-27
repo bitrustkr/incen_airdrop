@@ -1,5 +1,23 @@
+.slick-initialized .slick-slide {
+    margin: 0 3px; 
+}
+
 .slick-slide img {
     width: 100%;
+}
+
+.slick-next:before, 
+.slick-prev:before,
+.slick-next:focus, .slick-next:hover, .slick-prev:focus, .slick-prev:hover{
+    color:black
+}
+
+.slick-next:focus:before, .slick-next:hover:before, .slick-prev:focus:before, .slick-prev:hover:before{
+    color:black
+}
+
+.slick-disabled{
+    display: none !important;
 }
 
 @media (max-width: 768px) {
