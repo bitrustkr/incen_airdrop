@@ -21,21 +21,23 @@
         <div class="refer">
             <span class="code_tit"> My Referral code</span>
             <sapn class="code">dfjdkjfkljskdjflkasjfl</sapn>
-            <span class="oncopy">copy</span>
+            <span class="oncopy copy_to_clipboard" data-copy-text="dfjdkjfkljskdjflkasjfl">copy</span>
         </div>
 
         <% if(isLogin){ %>
             <div class="claim_btn">CLAIM</div>
         <% } else { %>
-            <div class="login_btn">LOGIN</div>
+            <div class="login_btn" onclick="signTwitter()">CONNECT</div>
         <% } %> 
     </div>
 
     <div class="daily_wrap">
+        <!-- 모바일 출석체크 ver -->
         <div class="daily_wrap_contents slideshow">
             <% Array.from({ length: 7 }).forEach(function(_, i) { %>
                 <% if(i > 3){ %>
-                    <div class="disable">
+                    <!-- 비활성화 -->
+                    <div class="disable" onclick="requestAttendance()">
                         <img src="/img/day_back_non.svg" alt=""/>
 
                         <div>
@@ -44,6 +46,7 @@
                         </div>
                     </div>
                 <% } else { %>
+                    <!-- 활성화 -->
                     <div class="active">
                         <img src="/img/day_back_active.svg" alt=""/>
 
@@ -55,10 +58,11 @@
             <% }); %>
         </div>
 
+        <!-- web 출석체크 ver -->
         <div class="daily_wrap_contents">
             <% Array.from({ length: 7 }).forEach(function(_, i) { %>
                 <% if(i > 3){ %>
-                    <div class="disable">
+                    <div class="disable"  onclick="requestAttendance()">
                         <img src="/img/day_back_non.svg" alt=""/>
 
                         <div>

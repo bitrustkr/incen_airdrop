@@ -16,15 +16,45 @@ $(document).ready(function(){
       ]
     });
 
-    $(".loginInfo").click(function(){
+    $(".loginInfo").click(function(event){
       var submenu = $('.hide');
+      submenu.toggle();
+      event.stopPropagation();
+    });
 
-      if( submenu.is(":visible") ){
-          submenu.toggle();
-      }else{
-          submenu.toggle();
+    $(".menu_sec a").click(function(event){
+      event.stopPropagation(); 
+    });
+
+    $(document).click(function() {
+      var submenu = $('.hide');
+      if (submenu.is(":visible")) {
+          submenu.hide();
       }
-  });
+    });
+
+    // 클립보드 복사 이벤트
+    $(".copy_to_clipboard").click (function(event) {
+      console.log("copy_to_clipboard")
+        event.preventDefault();
+        var copyText = $(this).data('copy-text');
+  
+        console.log(copyText)
+        copyToClipboard(copyText);
+        $("#confirm").css("display", "block");
+        $("#confirm .title").append("Copied to clipboard: " + copyText);
+    });
+  
+    function copyToClipboard(text) {
+        var tempInput = $("<input>");
+        $("body").append(tempInput);
+        tempInput.val(text).select();
+        document.execCommand("copy");
+        tempInput.remove();
+    }
 });
+
+
+
 
  

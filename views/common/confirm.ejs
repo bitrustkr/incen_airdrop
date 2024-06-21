@@ -1,21 +1,19 @@
 <div id="confirm" class="modal">
     <div class="modal-content">
-      <div class="tit">
-        Completed
-      </div>
-
       <div class="main_img">
-        <img src="/img/popup.png" alt=""/>
+        <img src="/img/logo.svg" alt=""/>
       </div>
 
       <div class="title"></div>
 
-      <div class="btn" onclick="redirect()">
-        Confirm
-      </div>
-
-      <div class="close" onclick="redirect()">
-        <img src="/img/popup_close.png" alt=""/>
+      <div class="btn_wrap">
+        <div class="btn" onclick="redirect('confirm')">
+          Confirm
+        </div>
+  
+        <div class="btn close" onclick="redirect('confirm')">
+          Close
+        </div>
       </div>
     </div>
   </div>

@@ -5,9 +5,6 @@ function copyRewardLink(text){
     }).catch(function(error) {
         $("#error").css("display", "block");
     });
-    // window.navigator.clipboard.writeText(text);
-    // window.open(text);
-    // alert('The link has been copied. Please visit the copied site through Chrome or Safari.');
 }
 
 function getMissions(type){

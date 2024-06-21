@@ -13,7 +13,53 @@
   
     <div class="right_contents">
       <div class="login_sec">
-        <% if(isLogin){ %>
+
+          <div class="loginInfo">
+            <span class="info">user name</span>
+            
+            <span class="burger">
+              <img src="/img/burger.svg" alt="" />
+            </span>
+  
+            <span class="smile">
+              <img src="/img/smile.svg" alt="" />
+            </span>
+  
+            <div class="hide">
+              <div class="menu_sec">
+                <a href="#">
+                  <img src="/img/twitter.svg" alt=""/>
+                  user name
+                </a>
+          
+                <a href="#" id="connectMetamaskBtn" onclick="connectMetamask()">
+                  <img src="/img/wallet.svg" alt=""/>
+                  <span>CONNECT</span>
+                </a>
+  
+                <a href="#" id="connectTelegramBtn" onclick="connectTelegram()">
+                  <img src="/img/telegram.svg" alt=""/>
+                  CONNECT
+                </a>
+        
+                <a href="#" id="connectDiscordBtn" onclick="connectDiscord()">
+                  <img src="/img/discord.svg" alt=""/>
+                  CONNECT
+                </a>
+              </div> 
+  
+              <div class="logout">
+                <div>
+                  My Referral : 00
+                </div>
+                <a  class="logout_btn" onclick="disconnectTwitter()">
+                  DISCONNECT
+                </a>
+              </div>
+            </div>
+          </div>
+
+        <!-- <% if(isLogin){ %>
           <div class="loginInfo">
             <span class="info">user name</span>
             
@@ -52,21 +98,21 @@
                 <div>
                   My Referral : 00
                 </div>
-                <a  class="logout_btn" href = "/users/logout">
+                <a  class="logout_btn" onclick="disconnectTwitter()">
                   DISCONNECT
                 </a>
               </div>
             </div>
           </div>
         <% } else { %>
-          <a class="m_login" onclick="singMetamask()">
+          <a class="m_login" onclick="signTwitter()">
             <img src="/img/m_login.svg" alt=""/>
           </a>
           
-          <a class="login" onclick="singMetamask()">
+          <a class="login" onclick="signTwitter()">
             CONNECT to X
           </a>
-        <% } %> 
+        <% } %>  -->
       </div>
     </div>
   </div>

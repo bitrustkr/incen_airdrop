@@ -12,28 +12,13 @@ function confirmAttendance(id) {
   let isLogin = getIsLogin();
 
   if(!isLogin || isLogin === 'false') {
-    singMetamask()
+    signTwitter()
   } else  {
     $("#daily_check").css("display", "block");
     selectedId = id;
   }
 }
 
-//  request attendance
-function requestAttendance() {  
-  axios
-  .post("/mission/repeatComplete", { missionNum: selectedId })
-  .then(function (res) {
-    if (res.data.result) {
-      localStorage.setItem('dailyCheck',true);
-      $("#daily_check").css("display", "none");
-      $("#confirm").css("display", "block");
-    } else {
-      $("#error").css("display", "block");
-      $("#error .title").append(res.data.message);
-    }
-  });
-}
 // append daily check 
 function appendDailyCheck (element, type, index, points) {
   let getDailyCheck = localStorage.getItem('dailyCheck');
@@ -169,7 +154,7 @@ function checkNotifyHolder (Num, cate, type){
   let isLogin = getIsLogin();
 
   if(!isLogin || isLogin=== 'false'){
-    singMetamask();
+    signTwitter();
   } else {
     switch (type){
       case 'holder' :
@@ -274,27 +259,34 @@ function confirmAllClear () {
 
 //redirect
 function redirect(type) {
-  if(type){
-    switch(type){
-      case 'none':
-        $("#logerror").css("display", "none");
-        $("#dailyCheckIn").css("display", "none");
+  switch(type){
+    case 'confirm' :
+      $("#confirm").css("display", "none");
+      $("#confirm .title").empty();
 
-        break
-
-      case 'getIn':
-        $("html, body").animate(
-          {
-            scrollTop: 1550,
-          },
-          1000
-        );
-
-        break
-    }
-  } else  {
-    window.location.href = '/?animation=true';
+      break
   }
+  // if(type){
+  //   switch(type){
+  //     case 'none':
+  //       $("#logerror").css("display", "none");
+  //       $("#dailyCheckIn").css("display", "none");
+
+  //       break
+
+  //     case 'getIn':
+  //       $("html, body").animate(
+  //         {
+  //           scrollTop: 1550,
+  //         },
+  //         1000
+  //       );
+
+  //       break
+  //   }
+  // } else  {
+  //   window.location.href = '/?animation=true';
+  // }
 }
 
 $(document).ready(function() {
@@ -316,7 +308,7 @@ function joinHompage(id,link) {
   let isLogin = getIsLogin();
 
   if(!isLogin || isLogin === 'false'){
-    singMetamask()
+    signTwitter()
   } else {
     axios
     .post(link, { missionNum: id })
@@ -375,7 +367,7 @@ $(document).ready(function () {
   if(modalValue === 'error') {
     switch (msgValue) {
       case 'Please LogIn':
-        singMetamask();
+        signTwitter();
 
         break;
 
@@ -392,184 +384,109 @@ $(document).ready(function () {
   }
 });
 
-//web3 : login, login check,
-async function singMetamask(){
-  try {
-    web3 = new Web3(web3.currentProvider);
-  } catch (error) {
-    window.open('https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=ko&pli=1');
+//-------------------------------------------------------------------
+// 로그인 
+async function signTwitter(){
+  console.log("signTwitter")  
+}
 
-    $("#logerror").css("display", "block");
-    $("#logerror .title").append('Please Install Metamask.');
+//로그아웃
+function disconnectTwitter (){
+  console.log("disconnectTwitter")  
+}
 
-    return;
-  }
+//메타마스크 연동
+function connectMetamask (){
+  console.log("connectMetamask")  
 
-  let contractAddr = '0xBc06d43f8163f02f8c53D80eA8538B2c31601e63';
-  let chainId = 56
-  const currentNetworkId = await ethereum.request({ method: 'net_version' });
-
-  if (currentNetworkId !== chainId) {
-    try {
-        await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: web3.utils.toHex(chainId) }], 
-        });
-    } catch (error) {      
-      window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-          chainId: "0x38",
-          rpcUrls: ["https://bsc-dataseed.binance.org/"],
-          chainName: "Binance Smart Chain",
-          nativeCurrency: {
-            name: "Binance Coin",
-            symbol: "BNB",
-            decimals: 18
-          },
-          blockExplorerUrls: ["https://bscscan.com/"]
-        }]
-      });
-
-      return;
-    }
-  }
-
-  let accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-  });
-
-  var typedData = {
-      types: {
-          EIP712Domain: [
-              { name: "name", type: "string" },
-              { name: "version", type: "string" },
-              { name: "chainId", type: "uint256" },
-              { name: "verifyingContract", type: "address" }
-          ],
-          Content: [
-              { name: "message", type: "string" },
-              { name: "account", type: "address" },
-              { name: "deadline", type: "uint"}
-          ]
-      },
-      domain: {
-          name: "airdrop.3kds.io",
-          version: "1",
-          chainId: chainId,
-          verifyingContract: contractAddr // 사용할 컨트랙트 주소 입력 마켓컨트랙트, 라우터컨트랙트
-      },
-      primaryType: "Content",
-      message: {
-          message: "Welcome!",
-          account: accounts[0], //연결된 사용자 메타마스크 주소
-          deadline: 0
-      }
-  };
-
-  typedData.message.deadline = Math.floor(Date.now() / 1000) + 180;
-
-  // 메타마스크로 서명시작
-  const signature = await window.ethereum.request({
-      method: "eth_signTypedData_v4",
-      params: [accounts[0], JSON.stringify(typedData)]
-  });
-
-  var sign = signature.substring(2);
-  var r = "0x" + sign.substring(0, 64);
-  var s = "0x" + sign.substring(64, 128);
-  var v = parseInt(sign.substring(128, 130), 16);
-
-  var contract = new web3.eth.Contract(signAbi, contractAddr);
-
-  //컨트랙트 확인
-  var callRst = await contract.methods['signatureValidation'](v, r, s, typedData.message.deadline).call({from: accounts[0]});
-
-  console.log('callRst::',callRst); //실패하면 0x00000000
-
-  var rst = await axios.post(`/users/login`, {address: accounts[0], deadline: typedData.message.deadline, hash: callRst});
-
-  if(rst.data.result){
-      window.location.href = "/";
-  } else {
-    console.log('error::',error);
-    $("#logerror").css("display", "block");
+  // 요청이 성공일 경우 copybtn으로 ui변경 및 완료 팝업
+  if(true){
+    localStorage.setItem('metamaskInfo', 'Ox123...1234');
+    changeToCopyButton('metamask','Ox123...1234');
   }
 }
 
-var signAbi = [
-	{
-		"inputs": [],
-		"name": "ECDSAInvalidSignature",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "length",
-				"type": "uint256"
-			}
-		],
-		"name": "ECDSAInvalidSignatureLength",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "s",
-				"type": "bytes32"
-			}
-		],
-		"name": "ECDSAInvalidSignatureS",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint8",
-				"name": "v",
-				"type": "uint8"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "r",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "s",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint256",
-				"name": "deadline",
-				"type": "uint256"
-			}
-		],
-		"name": "signatureValidation",
-		"outputs": [
-			{
-				"internalType": "bytes32",
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "timestamp",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
-];
+// Telegram 연동
+function connectTelegram (){
+  console.log("connectTelegram")  
+
+  // 요청이 성공일 경우 copybtn으로 ui변경 및 완료 팝업
+  if(true){
+    localStorage.setItem('telegramInfo', 'Ox123...1234');
+    changeToCopyButton('telegram','Ox123...1234');
+  }
+}
+
+// Discord 연동
+function connectDiscord (){
+  console.log("connectDiscord")
+  
+  // 요청이 성공일 경우 copybtn으로 ui변경 및 완료 팝업
+  if(true){
+    localStorage.setItem('discordInfo', 'Ox123...1234');
+    changeToCopyButton('discord','Ox123...1234');
+  }
+}
+
+function changeToCopyButton(type, address) {
+  let buttonHTML;
+
+  switch (type){
+    case 'metamask':
+      buttonHTML = `
+      <a href="#" class="copy_to_clipboard" data-copy-text="${address}">
+          <img src="/img/wallet.svg" alt=""/>
+          <span>${address}</span>
+      </a>
+      `;
+
+      $("#connectMetamaskBtn").replaceWith(buttonHTML);
+
+    break;
+
+    case 'telegram':
+      buttonHTML = `
+      <a href="#" class="copy_to_clipboard" data-copy-text="${address}">
+          <img src="/img/wallet.svg" alt=""/>
+          <span>${address}</span>
+      </a>
+      `;
+
+      $("#connectTelegramBtn").replaceWith(buttonHTML);
+    break;
+
+    case 'discord':
+      buttonHTML = `
+      <a href="#" class="copy_to_clipboard" data-copy-text="${address}">
+          <img src="/img/wallet.svg" alt=""/>
+          <span>${address}</span>
+      </a>
+      `;
+
+      $("#connectDiscordBtn").replaceWith(buttonHTML);
+
+    break;
+  }
+}
+
+// social 연동 확인
+let storedMetamask = localStorage.getItem('metamaskInfo');
+let storedTelegram = localStorage.getItem('telegramInfo');
+let storedDiscord = localStorage.getItem('discordInfo');
+
+if (storedMetamask) {
+    changeToCopyButton('metamask',storedMetamask);
+}
+
+if (storedTelegram) {
+  changeToCopyButton('telegram',storedMetamask);
+}
+
+if (storedDiscord) {
+  changeToCopyButton('discord',storedMetamask);
+}
+
+// 출석체크
+function requestAttendance() {  
+  console.log('requestAttendance')
+}

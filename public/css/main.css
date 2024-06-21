@@ -176,6 +176,10 @@ body{
     position: relative;
 }
 
+.section1 .daily_wrap_contents .disable{
+    cursor: pointer;
+}
+
 .section1 .daily_wrap_contents .active >div{
     position: absolute;
     left: 50%;
@@ -195,8 +199,7 @@ body{
 }
 
 .section1 .daily_wrap_contents .active >div{
-    bottom: -1px;
-    font-size: 8px;
+    bottom: 14px;
 }
 
 .section1 .daily_wrap_contents .point{
@@ -262,7 +265,7 @@ body{
     margin-right: 10px;
 }
 
-.section2 .mission_list .connect {
+.section2 .mission_list .m_btn {
     background: #FFD543;
     border-radius: 5px;
     display: flex;
@@ -270,7 +273,18 @@ body{
     justify-content: center;
     padding: 10px;
     font-family: 'GmarketSansBold';
-    font-size: 15px;
+    font-size: 12px;
+    min-width: 100px;
+}
+
+.section2 .mission_list .m_btn.claim {
+    background: #183EB0;
+    color:#fff
+}
+
+.section2 .mission_list .m_btn.completed {
+    background: #bbb;
+    color:#fff
 }
 
 @media (max-width: 768px) {
@@ -380,6 +394,11 @@ body{
 
     .section1 .daily_wrap_contents .disable >div{
         width: 100%;
+    }
+    
+    .section1 .daily_wrap_contents .active >div{
+        bottom: 0px;
+        font-size: 8px;
     }
 
     .section2 .mission_list >div {

@@ -21,7 +21,8 @@
     transform: translate(-50%, -50%);
     color: #000;
     background: #fff;
-    border-radius: 30px;
+    border:8px solid #ffd527
+    /* border-radius: 30px; */
 }
 
 /* daily */
@@ -141,8 +142,52 @@
     color: #fff;
 }
 
-/* confirm, error, deilycheck */
-#confirm .modal-content,
+/* confirm */
+#confirm .modal-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    width: 20%;
+    padding: 20px 20px 0 20px;
+}
+
+#confirm .main_img >img{
+    width: 100px;
+}
+
+#confirm .title{
+    color: #000;
+    padding: 60px 0;
+    width: 100%;
+    text-align: center;
+}
+
+#confirm .btn_wrap{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#confirm .btn_wrap .btn{
+    background: #ffd527;
+    color:#fff;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#confirm .btn_wrap .btn.close{
+    background: none;
+    color: #000;
+    /* margin: 0; */
+}
+
+/* error, deilycheck */
 #error .modal-content,
 #logerror .modal-content,
 #daily_check .modal-content{
@@ -155,7 +200,6 @@
     padding: 40px;
 }
 
-#confirm .tit,
 #error .tit,
 #logerror .tit,
 #daily_check .tit{
@@ -165,7 +209,6 @@
     padding: 20px 0;
 }
 
-#confirm .btn,
 #error .btn,
 #logerror .btn,
 #daily_check .btn{
@@ -190,7 +233,6 @@
     color:#4B5AFF;
 }
 
-#confirm .close,
 #error .close,
 #logerror .close,
 #daily_check .close{
@@ -213,7 +255,6 @@
     width: 50%;
 }
 
-#confirm .title,
 #error .title,
 #logerror .title{
     color: #000;
