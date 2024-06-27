@@ -6,6 +6,10 @@ router.get("/", async (req, res) => {
 
   var user = {};
   var userId = 0;
+  var attd = {
+    continuityAttd : 0,
+    todayAttd : false
+  };
 
   if (req.isAuthenticated()) {
     user = {
@@ -18,6 +22,36 @@ router.get("/", async (req, res) => {
     };
 
     userId = req.user.id;
+
+    // 연속 출석
+    qry = `
+      SELECT 
+          attendance_date, point 
+      FROM attendance
+      WHERE user_id = ?
+      AND attendance_date = current_date() - INTERVAL 1 DAY
+    `;
+    params = [req.user.id];
+    var attdClrRst = await db.dbQuery(qry, params);
+
+    if(attdClrRst.length > 0 && attdClrRst[0].point != 7){
+      attd.continuityAttd = attdClrRst[0].point;
+    }
+    
+    // 오늘 출석
+    qry = `
+      SELECT 
+          attendance_date, point 
+      FROM attendance
+      WHERE user_id = ?
+      AND attendance_date = current_date()
+    `;
+    params = [req.user.id];
+    attdClrRst = await db.dbQuery(qry, params);
+
+    if(attdClrRst.length > 0){
+      attd.todayAttd = true;
+    }
   }
 
   var qry = `
@@ -54,7 +88,7 @@ router.get("/", async (req, res) => {
     mission[missionList[i].category].push(missionList[i]);
   }
 
-  res.render("index", { isLogin: req.isAuthenticated(), user: user, mission : mission });
+  res.render("index", { isLogin: req.isAuthenticated(), user: user, mission : mission, attd : attd });
 });
 
 // twitterSuccess
