@@ -2,153 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 /* GET Mission list. */
-router.get('/missionList', async function(req, res, next) {
-    var result = {
-        result : false
-    }
-
-    var isLogin = false;
-
-    if (!req.isAuthenticated()) {
-        isLogin = false;
-    }else{
-        isLogin = true;
-    }
-
-    if(!await common.validateCategory(req.query.category)) {
-        console.log('validate error : category');
-        console.log(req.query.category);
-        result.message = 'validate error : category';
-
-        return res.json(result);
-    }
-
-    try{
-
-        var cate = await common.getCategory(req.query.category);
-        var categoryWQry = "";
-        var categoryAQry = "";
-
-        if(cate != "ALL") {
-            categoryWQry = " WHERE category = '" + cate + "'";
-            categoryAQry = " AND category = '" + cate + "'";
-        }
-        var qry = `
-            SELECT
-                id, title, point, category, \`type\`, \`repeat\`, link, null as rewardLink, \`order\`
-            FROM mission ` + categoryWQry + `
-            ORDER BY \`order\` ASC
-        `;
-        var params = [];
-        var missionRst = await db.dbQuery(qry, params);
-        var unclear = missionRst;
-        var attendanceCnt = 0;
-
-        var clearRst = [];
-
-        if(isLogin){
-            qry = `
-                SELECT COUNT(*) as cnt 
-                FROM mission_complete 
-                WHERE 
-                    mission_id = (
-                        SELECT id 
-                        FROM mission 
-                        WHERE \`type\` = 'attendance'
-                    )
-                    AND user_id = ?
-            `;
-            params = [req.user.id];
-            var cntRst = await db.dbQuery(qry, params);
-            attendanceCnt = cntRst[0].cnt;
-
-            var isMaxAttendance = false;
-            if(attendanceCnt > 29) isMaxAttendance = true;
-
-            qry = `
-                SELECT
-                    A.id
-                FROM
-                    mission A
-                    JOIN
-                    mission_complete B
-                    ON A.id = B.mission_id
-                WHERE
-                    B.user_id = ?
-                    AND A.\`repeat\` = 'N' ` + categoryAQry + `
-                ORDER BY A.\`order\` ASC
-            `;
-            params = [req.user.id];
-            var noRepeatClrRst = await db.dbQuery(qry, params);
-
-            for(var i = unclear.length - 1; i >= 0; i--){
-                var temp = unclear[i];
-                for(var j = 0; j < noRepeatClrRst.length; j++){
-                    if(temp.id == noRepeatClrRst[j].id){
-                        unclear.splice(i, 1);
-                    }
-                }
-            }
-
-            qry = `
-                SELECT
-                    A.id
-                FROM
-                    mission A
-                    JOIN
-                    mission_complete B
-                    ON A.id = B.mission_id
-                WHERE
-                    B.user_id = ?
-                    AND A.\`repeat\` <> 'N'
-                    AND B.complete_dt > CURRENT_DATE ` + categoryAQry + `
-                ORDER BY A.\`order\` ASC
-            `;
-            params = [req.user.id];
-            var repeatClrRst = await db.dbQuery(qry, params);
-
-            for(var i = unclear.length - 1; i >= 0; i--){
-                var temp = unclear[i];
-                for(var j = 0; j < repeatClrRst.length; j++){
-                    if(temp.id == repeatClrRst[j].id){
-                        unclear.splice(i, 1);
-                    }else if(isMaxAttendance){
-                        // 출석 체크 max
-                        unclear.splice(i, 1);
-                    }
-                }
-            }
-
-            qry = `
-                SELECT
-                    A.id, A.title, A.point, A.category, A.\`type\`, A.\`repeat\`, A.link, B.rewardLink as rewardLink, DATE_FORMAT(B.complete_dt, '%Y-%m-%d') as complete_date, A.\`order\`
-                FROM
-                    mission A
-                    JOIN
-                    mission_complete B
-                    ON A.id = B.mission_id
-                WHERE
-                    B.user_id = ? ` + categoryAQry + `
-                ORDER BY A.\`order\` ASC
-            `;
-            params = [req.user.id];
-            clearRst = await db.dbQuery(qry, params);
-        }
-
-        
-
-        result = {
-            result : true,
-            unclear : unclear,
-            clear : clearRst,
-            attendanceCnt : attendanceCnt
-        }
-    } catch(error){
-        console.log(error);
-    }
-
-    res.json(result);
-});
 
 router.post('/repeatComplete', async function(req, res, next) {
     var result = {
@@ -340,7 +193,7 @@ router.post('/homepage', async function(req, res, next) {
         result : false
     }
 
-    if (typeof req.user == 'undefined') {
+    if (!req.isAuthenticated()) {
       result.message = "Not logged in."
       return res.json(result);
     }
@@ -463,6 +316,8 @@ router.post('/homepage', async function(req, res, next) {
         console.log('After Point : ' + userRst[0].point);
 
         await db.transEnd(con);
+
+        req.session.passport.user.point = userRst[0].point;
 
         result = {
             result : true,

@@ -1,0 +1,26 @@
+<html>
+
+<head>
+  <title>INCN AIRDROP</title>
+</head>
+
+<body>
+  <h1>INCN</h1>
+  <h3 id = 'msg'></h3>
+  <script>
+    const url = new URLSearchParams(location.search).get('url');
+    console.log(url);
+    const newWin = window.open(url, '_blank');
+
+    if(!newWin || newWin.closed || typeof newWin.closed == 'undefined') {
+        var msg = document.querySelector("#msg");
+        msg.innerHTML = 'Please disable pop-up blocker and refresh.';
+    }else{
+        console.log('open');
+        window.location.href = '/';
+    }
+
+  </script>
+</body>
+
+</html>

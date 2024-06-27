@@ -20,6 +20,7 @@ var missionRouter = require('./routes/mission');
 var walletRouter = require('./routes/wallet');
 var twitterRouter = require('./routes/twitter');
 var discordRouter = require('./routes/discord');
+var testRouter = require('./routes/test');
 
 var app = express();
 
@@ -51,7 +52,7 @@ var sess = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge:1800000
+    maxAge:3600000
   }
 };
 
@@ -99,6 +100,7 @@ app.use('/mission', missionRouter);
 app.use('/wallet', walletRouter);
 app.use('/twitter', twitterRouter);
 app.use('/discord', discordRouter);
+app.use('/test', testRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

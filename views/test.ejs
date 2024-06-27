@@ -6,21 +6,61 @@
 </head>
 
 <body>
-  <h1>Metamask</h1>
+  <h1>INCN</h1>
   <h1><%= isLogin %></h1>
-  <a href = "javascript:test();">log in</a><br/>
-  <a href = "/users/logout">log out</a><br/>
+  <% if(isLogin) { %>
+    <h3>referer : http://1.234.112.72:3784?referer=<%= user.id %></h3>
+    <h3>twitter id : <%= user.twitter_id %></h3>
+    <h3>discord id : <%= user.discord_id %></h3>
+    <h3>address : <%= user.address %></h3>
+    <h3>point : <%= user.point %></h3>
+    <h3>name : <%= user.name %></h3>
+    <script>const loginAddr = "<%= user.address %>"; </script>
+    <a href = "/test/logout">log out</a><br/>
+  <% } else { %>
+    <a href = "/users/login">log in</a><br/>
+    <script>const loginAddr = ""; </script>
+  <% } %>
   <br/>
   <br/>
-  <a href = "javascript:getMissions();">get missions</a><br/>
-  <a href = "javascript:repeatComplete();">attendance clear</a><br/>
+  <h1>attendance info</h1>
+  <h3>연속 출석 일수(오늘 출석 포함 안함) : <%= attd.continuityAttd %></h3>
+  <h3>금일 출석 여부 : <%= attd.todayAttd %></h3>
   <br/>
   <br/>
-  <a href = "javascript:nftHolder();">nft holder clear</a><br/>
+  <h1>missionList</h1>
+  <h3>connect</h3>
+  <%= JSON.stringify(mission['connect']) %>
+  <br/>
+  <h3>twitter</h3>
+  <%= JSON.stringify(mission['twitter']) %>
+  <br/>
+  <h3>test</h3>
+  <%= JSON.stringify(mission['test']) %>
+  <br/>
+  <h3>discord</h3>
+  <%= JSON.stringify(mission['discord']) %>
   <br/>
   <br/>
-  <input type="text" id = "coupon" />
-  <a href = "javascript:coupon();">coupon code</a><br/>
+  <h1>Twitter</h1>
+  <a href = "/twitter/like?missionNum=31">like</a><br/>
+  <a href = "/twitter/retweet?missionNum=32">retweet</a><br/>
+  <a href = "/twitter/follow?missionNum=33">follow</a><br/>
+  <br/>
+  <br/>
+  <h1>Discord</h1>
+  <a href = "/discord/oauth">connect</a><br/>
+  <a href = "/discord/join?missionNum=35">join</a><br/>
+  <a href = "/discord/rank/1255625145809113178">test_role check</a><br/>
+  <br/>
+  <br/>
+  <h1>Telegram</h1>
+  <a href = "javascript:joinHompage(38,'/mission/homepage');">join</a><br/>
+  <br/>
+  <br/>
+  <h1>metamask</h1>
+  <a href = "javascript:connectMetamask();">connect</a><br/>
+  <a href = "javascript:attendance();">attendance</a><br/>
   <br/>
   <br/>
   <a href = "javascript:allClear();">all clear</a><br/>

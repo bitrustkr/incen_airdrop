@@ -11,7 +11,7 @@ router.get(
   "/oauth",
   async function(req, res, next){
     var url = "/";
-    if (typeof req.user == 'undefined' || !req.user.id) {
+    if (!req.isAuthenticated()) {
       return res.redirect('/?modal=error&message=' + encodeURIComponent('Please LogIn'));
     }
 
@@ -59,7 +59,7 @@ router.get(
   "/join",
   async function(req, res, next){
     var url = "/";
-    if (typeof req.user == 'undefined' || !req.user.id) {
+    if (!req.isAuthenticated()) {
       return res.redirect('/?modal=error&message=' + encodeURIComponent('Please LogIn'));
     }
 
@@ -143,7 +143,7 @@ router.get(
         url = 'https://discord.com/oauth2/authorize?';
         url += 'client_id=' + process.env.DISCORD_CLIENT_ID;
         url += '&response_type=code';
-        url += '&redirect_uri=' + encodeURIComponent(process.env.DISCORD_JOIN_CALLBACK_URL + missionRst[0].id + "/" + missionRst[0].category);
+        url += '&redirect_uri=' + encodeURIComponent(process.env.DISCORD_JOIN_CALLBACK_URL + missionRst[0].id + "/" + missionRst[0].value);
         url += '&scope=guilds.join+identify';
 
     } catch(error){
@@ -158,8 +158,15 @@ router.get(
   async function(req, res, next){
     var rank = req.params.rank
     var url = "/";
-    if (typeof req.user == 'undefined' || !req.user.id) {
+    if (!req.isAuthenticated()) {
       return res.redirect('/?modal=error&message=' + encodeURIComponent('Please LogIn'));
+    }
+
+    if(!await common.validateNum(req.params.rank)) {
+        console.log('validate error : rank');
+        console.log(req.params.rank);
+
+        return res.redirect('/?modal=error&message=' + encodeURIComponent('validate error : rank.'));
     }
 
     console.log('session id : ' + req.user.id);
@@ -252,7 +259,7 @@ router.get(
     var url = '/';
 
     try{
-        if (typeof req.user == 'undefined' || !req.user.id) {
+        if (!req.isAuthenticated()) {
           return res.redirect('/?modal=error&message=' + encodeURIComponent('Please LogIn'));
         }
     
@@ -423,6 +430,10 @@ router.get(
         }
 
         await db.transEnd(con);
+
+        req.session.passport.user.point = req.session.passport.user.point + missionRst[0].point;
+        req.session.passport.user.discord_id = resp.data.id;
+
         url = '/?modal=complete';
     } catch(error) {
         console.log(error);
@@ -437,17 +448,32 @@ router.get(
 );
 
 router.get(
-  "/join/redirect/:missionNum/:category",
+  "/join/redirect/:missionNum/:value",
   async function(req, res, next){
     var code = req.query.code;
     var missionNum = req.params.missionNum;
-    var category = req.params.category;
+    var category = req.params.value;
     var con = undefined;
     var url = '/';
 
     try{
-        if (typeof req.user == 'undefined' || !req.user.id) {
+        if (!req.isAuthenticated()) {
           return res.redirect('/?modal=error&message=' + encodeURIComponent('Please LogIn'));
+        }
+
+        if(!await common.validateCategory(req.params.value)) {
+            console.log('validate error : category');
+            console.log(req.params.value);
+            result.message = 'validate error : category';
+    
+            return res.json(result);
+        }
+
+        if(!await common.validateNum(req.params.missionNum)) {
+            console.log('validate error : missionNum');
+            console.log(req.params.missionNum);
+    
+            return res.redirect('/?modal=error&message=' + encodeURIComponent('validate error : missionNum.'));
         }
     
         console.log('session : ' + req.user);
@@ -460,7 +486,7 @@ router.get(
             FROM mission
             WHERE
                 id = ?
-                AND \`category\` = ?
+                AND \`value\` = ?
                 AND type = 'discord'
                 AND link = '/discord/join'
         `;
@@ -630,6 +656,9 @@ router.get(
         }
 
         await db.transEnd(con);
+
+        req.session.passport.user.point = req.session.passport.user.point + missionRst[0].point;
+
         url = '/?modal=complete';
     } catch(error) {
         console.log(error);
@@ -652,8 +681,15 @@ router.get(
     var url = '/';
 
     try{
-        if (typeof req.user == 'undefined' || !req.user.id) {
+        if (!req.isAuthenticated()) {
           return res.redirect('/?modal=error&message=' + encodeURIComponent('Please LogIn'));
+        }
+
+        if(!await common.validateNum(req.params.rank)) {
+            console.log('validate error : rank');
+            console.log(req.params.rank);
+    
+            return res.redirect('/?modal=error&message=' + encodeURIComponent('validate error : rank.'));
         }
     
         console.log('session : ' + req.user);
@@ -680,7 +716,7 @@ router.get(
             return res.redirect('/?modal=error&message=' + encodeURIComponent('not found mission.'));
         }
 
-        var category = missionRst[0].category;
+        var category = missionRst[0].value;
 
         qry = `
             SELECT
@@ -839,6 +875,9 @@ router.get(
         }
 
         await db.transEnd(con);
+
+        req.session.passport.user.point = req.session.passport.user.point + missionRst[0].point;
+
         url = '/?modal=complete';
     } catch(error) {
         console.log(error);
