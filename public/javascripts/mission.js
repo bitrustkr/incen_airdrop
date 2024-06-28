@@ -214,13 +214,25 @@ function repeatComplete() {
 
 // 출석체크
 async function attendance() {
-  console.log(123);
-  console.log(isLogin);
-  console.log(typeof isLogin);
+  const todayAttd = document
+    .querySelector(".daily_wrap_contents")
+    .getAttribute("data-today-attd");
+
+  console.log(todayAttd);
+  console.log(typeof todayAttd);
 
   if (isLogin === "false") {
     $("#confirm").css("display", "block");
     $("#confirm .title").append("Please Login");
+
+    return;
+  }
+
+  if (todayAttd === "true") {
+    $("#confirm").css("display", "block");
+    $("#confirm .title").append(
+      "Attendance check has already been completed today."
+    );
 
     return;
   }

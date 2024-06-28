@@ -49,34 +49,37 @@
     </div>
 
     <div class="daily_wrap">
-        <!-- 모바일 출석체크 ver -->
-        <div class="daily_wrap_contents slideshow">
-            <% Array.from({ length: 7 }).forEach(function(_, i) { %>
-                <% if(i > 3){ %>
-                    <!-- 비활성화 -->
-                    <div class="disable" onclick="attendance()">
-                        <img src="/img/day_back_non.svg" alt=""/>
-
-                        <div>
-                            <div class="day">Day <%= i + 1 %></div>
-                            <div class="point">+ 1</div>
-                        </div>
-                    </div>
-                <% } else { %>
-                    <!-- 활성화 -->
-                    <div class="active">
-                        <img src="/img/day_back_active.svg" alt=""/>
-
-                        <div>
-                            <div class="point"> +<%= i + 1 %></div>
-                        </div>
-                    </div>
-                <% } %> 
-            <% }); %>
-        </div>
         <% const continuityAttd = Number(attd.continuityAttd); %>
         <% const todayAttd = Boolean(attd.todayAttd); %>
         <% const daysInCycle = 7; %>
+
+        <!-- 모바일 출석체크 ver -->
+        <div class="daily_wrap_contents slideshow"
+            data-today-attd="<%= todayAttd %>" 
+            data-continuity-attd="<%= continuityAttd %>" 
+            >
+            <% for (let i = 0; i < daysInCycle; i++) { %>
+                <% const isAttended = (i < continuityAttd) || (i === continuityAttd && todayAttd); %>
+            
+                <% if (isAttended) { %>
+                    <div class="active">
+                        <img src="/img/day_back_active.svg" alt=""/>
+                        <div>
+                            <div class="point"><%= i + 1 %></div>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="disable" onclick="attendance()">
+                        <img src="/img/day_back_non.svg" alt=""/>
+                        <div>
+                            <div class="day">Day <%= i + 1 %></div>
+                            <div class="point">+ <%= i + 1 %></div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+       
         <!-- web 출석체크 ver -->
         <div class="daily_wrap_contents"
             data-today-attd="<%= todayAttd %>" 
@@ -86,14 +89,14 @@
                 <% const isAttended = (i < continuityAttd) || (i === continuityAttd && todayAttd); %>
             
                 <% if (isAttended) { %>
-                    <div class="active" onclick="attendance()" data-test="if">
+                    <div class="active">
                         <img src="/img/day_back_active.svg" alt=""/>
                         <div>
-                            <div class="point">+ 1</div>
+                            <div class="point"><%= i + 1 %></div>
                         </div>
                     </div>
                 <% } else { %>
-                    <div class="disable">
+                    <div class="disable" onclick="attendance()">
                         <img src="/img/day_back_non.svg" alt=""/>
                         <div>
                             <div class="day">Day <%= i + 1 %></div>
