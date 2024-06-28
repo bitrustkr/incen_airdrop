@@ -350,17 +350,20 @@ async function attendance() {
 }
 
 $(document).ready(function () {
+  if (isLogin !== "true") {
+    localStorage.removeItem("metaSignature");
+  }
+
   getMissions();
 
   // Parse URL parameters
   const urlParams = new URLSearchParams(window.location.search);
   const modalParam = urlParams.get("modal");
 
-  // Check if modal=complete exists in the URL
   if (modalParam === "complete") {
     $("#confirm").css("display", "block");
     $("#confirm .coin").append(`<img src="/img/coin.png" alt="">`);
-    $("#confirm .title").append("COMPLETE!"); // Show the modal
+    $("#confirm .title").append("COMPLETE!");
   }
 
   if (modalParam === "error") {
@@ -369,6 +372,6 @@ $(document).ready(function () {
 
     $("#confirm").css("display", "block");
     $("#confirm .coin").append(`<img src="/img/coin.png" alt="">`);
-    $("#confirm .title").append(`<p>Error!"</p><p>${message}</p<>`); // Show the modal
+    $("#confirm .title").append(`<p>Error!"</p><p>${message}</p<>`);
   }
 });

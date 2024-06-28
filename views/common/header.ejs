@@ -11,12 +11,6 @@
       </div>
     </div>
 
-
-  <script>
-    console.log("<%= user.name %>");
-
-    console.log("<%= user.discord_id %>" === '');
-  </script>
     <div class="right_contents">
       <div class="login_sec">
         <% if(isLogin){ %>
@@ -68,7 +62,7 @@
                     <span><%= user.discord_id %></span>
                   </a>
                 <% } else { %>
-                  <a href="/discord/oauth" id="connectMetamaskBtn">
+                  <a href="#" id="connectMetamaskBtn">
                     <img src="/img/discord.svg" alt=""/>
                     <span>CONNECT</span>
                   </a>

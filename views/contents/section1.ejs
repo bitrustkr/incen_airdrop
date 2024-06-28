@@ -17,6 +17,14 @@
         </div>
     </div>
 
+    
+    <script>
+        console.log("<%= attd.continuityAttd %>");
+        console.log(typeof"<%= attd.continuityAttd %>");
+        console.log("<%= attd.todayAttd %>");
+        console.log(typeof "<%= attd.todayAttd %>");
+    </script>
+    
     <div class="my_refer_wrap">
         <div class="refer">
             <span class="code_tit"> My Referral code</span>
@@ -66,35 +74,34 @@
                 <% } %> 
             <% }); %>
         </div>
-
+        <% const continuityAttd = Number(attd.continuityAttd); %>
+        <% const todayAttd = Boolean(attd.todayAttd); %>
+        <% const daysInCycle = 7; %>
         <!-- web 출석체크 ver -->
-        <div class="daily_wrap_contents">
-            <% Array.from({ length: 7 }).forEach(function(_, i) { %>'
-                <% if(attd.continuityAttd  === 0 || attd.continuityAttd === 7 ){ %>
-                    <div class="disable" onclick="attendance()">
-                        <img src="/img/day_back_non.svg" alt=""/>
+        <div class="daily_wrap_contents"
+            data-today-attd="<%= todayAttd %>" 
+            data-continuity-attd="<%= continuityAttd %>" 
+            >
+            <% for (let i = 0; i < daysInCycle; i++) { %>
+                <% const isAttended = (i < continuityAttd) || (i === continuityAttd && todayAttd); %>
+            
+                <% if (isAttended) { %>
+                    <div class="active" onclick="attendance()" data-test="if">
+                        <img src="/img/day_back_active.svg" alt=""/>
                         <div>
-                            <div class="day">Day <%= i + 1 %></div>
-                            <div class="point">+ 1</div>
-                        </div>
-                    </div>
-                <% } else if ( i > attd.continuityAttd ) { %>
-                    <div class="disable" onclick="attendance()">
-                        <img src="/img/day_back_non.svg" alt=""/>
-                        <div>
-                            <div class="day">Day <%= i + 1 %></div>
                             <div class="point">+ 1</div>
                         </div>
                     </div>
                 <% } else { %>
-                    <div class="active">
-                        <img src="/img/day_back_active.svg" alt=""/>
+                    <div class="disable">
+                        <img src="/img/day_back_non.svg" alt=""/>
                         <div>
-                            <div class="point"> +<%= i + 1 %></div>
+                            <div class="day">Day <%= i + 1 %></div>
+                            <div class="point">+ <%= i + 1 %></div>
                         </div>
                     </div>
                 <% } %>
-            <% }); %>
+            <% } %>
 
             <!-- <% Array.from({ length: 7 }).forEach(function(_, i) { %>
                 <% if(i > 3){ %>

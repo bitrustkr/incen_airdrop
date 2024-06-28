@@ -373,8 +373,16 @@ $(document).ready(function () {
 
 //-------------------------------------------------------------------
 // 로그인
+
 async function signTwitter() {
-  location.href = "/users/login";
+  const urlParams = new URLSearchParams(window.location.search);
+  const refererParam = urlParams.get("referer");
+
+  if (refererParam) {
+    location.href = `/users/login?referer=${refererParam}`;
+  } else {
+    location.href = "/users/login";
+  }
 }
 
 //로그아웃
@@ -466,7 +474,6 @@ var checkAbi = {
 };
 
 //web3
-//logout 할때 localStorage.setItem('metaSignature', signature); 이거 값 날려버리기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 async function connectMetamask() {
   try {
     web3 = new Web3(web3.currentProvider);
