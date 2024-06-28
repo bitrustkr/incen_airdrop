@@ -1,27 +1,32 @@
-<div class="section2">
+<div class="section2" 
+    data-login="<%= isLogin %>"
+    data-connect="<%= JSON.stringify(mission['connect']) %>"
+    data-twitter="<%= JSON.stringify(mission['twitter']) %>"
+    data-test="<%= JSON.stringify(mission['test']) %>"
+    data-discord="<%= JSON.stringify(mission['discord']) %>"
+>
     <div class="mission_wrap">
         <div class="tit">CONNECT</div>
         
-        <div class="mission_list">
-            <% Array.from({ length: 5 }).forEach(function(_, i) { %>
-                <div>
-                    <div class="left">
-                        <div class="poin">+50</div>
-                        <div class="mission">Connect your Wallet</div>
-                    </div>
-
-                    <% if(isLogin){ %>
-                        <div class="connect">CONNECT</div>
-                    <% } else { %>
-                        <div></div>
-                    <% } %> 
-
-                    <!-- btn ex -->
-                    <!-- <div class="m_btn connect">CONNECT</div>
-                    <div class="m_btn claim">CLAIM</div>
-                    <div class="m_btn completed">COMPLETED</div> -->
-                </div>
-            <% }); %>
+        <div class="mission_list connect">
         </div>
     </div>
+
+    <div class="mission_wrap">
+        <div class="tit">TWITTER</div>
+        
+        <div class="mission_list twitter"></div>
+    </div>
+
+    <div class="mission_wrap">
+        <div class="tit">DISCORD</div>
+        
+        <div class="mission_list discord"></div>
+    </div>
+
+    <!-- <div class="mission_wrap">
+        <div class="tit">TEST</div>
+        
+        <div class="mission_list test"></div>
+    </div> -->
 </div>

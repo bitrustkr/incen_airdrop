@@ -1,4 +1,4 @@
-.app-header{
+.app-header {
     background: #fff;
     height: 65px;
     width: 100%;
@@ -19,34 +19,34 @@
 }
 
 /* left */
-.app-header .left_contens{
+.app-header .left_contens {
     display: flex;
     align-items: center;
     max-width: 300px;
 }
 
-.app-header .left_contens .logo{
+.app-header .left_contens .logo {
     width: 120px;
     height: 100%;
     display: flex;
     align-items: center;
-    padding:5px;
+    padding: 5px;
 }
 
-.app-header .left_contens .logo >img{
+.app-header .left_contens .logo>img {
     width: 100%;
 }
 
-.app-header .left_contens .tit{
+.app-header .left_contens .tit {
     font-weight: bold;
     font-size: 24px;
     padding: 0 0 0 20px;
 }
 
 /* right */
-.app-header .right_contents{
-   display: flex;
-   align-items: center;
+.app-header .right_contents {
+    display: flex;
+    align-items: center;
 }
 
 /* .app-header .right_contents .menu_sec {
@@ -74,15 +74,15 @@
     height: 100%;
 }
 
-.app-header .right_contents .login_sec > a,
-.app-header .right_contents .login_sec .loginInfo{
+.app-header .right_contents .login_sec>a,
+.app-header .right_contents .login_sec .loginInfo {
     display: flex;
     align-items: center;
     width: 180px;
     min-width: 170px;
     background: #ffd527;
-    border:2px solid #000;
-    color:#000;
+    border: 2px solid #000;
+    color: #000;
     border-radius: 30px;
     height: 40px;
     font-weight: bold;
@@ -93,27 +93,27 @@
     user-select: none;
 }
 
-.app-header .right_contents .login_sec .login{
+.app-header .right_contents .login_sec .login {
     justify-content: center;
 }
 
-.app-header .right_contents .login_sec .loginInfo{
-    position:relative;
+.app-header .right_contents .login_sec .loginInfo {
+    position: relative;
 }
 
-.app-header .right_contents .login_sec .loginInfo > .smile{
-    position:absolute;
+.app-header .right_contents .login_sec .loginInfo>.smile {
+    position: absolute;
     right: -2px;
     width: 40px;
     height: 40px;
 }
 
-.app-header .right_contents .login_sec .loginInfo .info{
+.app-header .right_contents .login_sec .loginInfo .info {
     line-height: 1px;
     margin-left: 30px;
 }
 
-.app-header .hide{
+.app-header .hide {
     display: none;
     position: absolute;
     bottom: -330px;
@@ -124,72 +124,79 @@
     border: 1px solid #ffd527;
 }
 
-.app-header .hide .menu_sec{
+.app-header .hide .menu_sec {
     display: flex;
     flex-direction: column;
-    padding:10px;
+    padding: 10px;
     border-bottom: 2px solid #ffd527;
 }
 
-.app-header .hide .menu_sec a{
+.app-header .hide .menu_sec a {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 5px 5px 5px 15px;
-    border:1px solid #183EB0;
-    color:#000;
+    padding: 5px 5px 5px 40px;
+    border: 1px solid #183EB0;
+    color: #000;
     border-radius: 20px;
     margin-bottom: 10px;
-    font-size: 12px;
+    font-size: 10px;
     text-decoration: none;
 }
 
-.app-header .hide .menu_sec a:hover{
-    background: #183EB0;
-    color:#FFF;
+.app-header .hide .menu_sec a>span {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.app-header .hide .menu_sec a > img {
+.app-header .hide .menu_sec a:hover {
+    background: #183EB0;
+    color: #FFF;
+}
+
+.app-header .hide .menu_sec a>img {
     position: absolute;
     left: 0;
     width: 35px;
     height: 35px;
 }
 
-.app-header .hide .logout{
+.app-header .hide .logout {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px 10px;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .app-header .hide .logout_btn {
     font-size: 15px;
-    color:#FF0000;
+    color: #FF0000;
     font-family: 'GmarketSansBold';
     text-decoration: none;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 .app-header .m_login,
-.app-header .burger{
+.app-header .burger {
     display: none !important;
 }
 
 @media (max-width: 540px) {
-    .app-header .app-header-wrap{
+    .app-header .app-header-wrap {
         padding: 5px 10px;
     }
-    
-    .app-header .left_contens{
+
+    .app-header .left_contens {
         flex-direction: column;
     }
 
-    .app-header .left_contens .logo{
+    .app-header .left_contens .logo {
         width: 100px;
     }
 
@@ -203,7 +210,7 @@
         height: 35px;
     } */
 
-    .app-header .right_contents .login_sec .loginInfo{
+    .app-header .right_contents .login_sec .loginInfo {
         all: unset;
         position: relative;
         width: 180px;
@@ -213,8 +220,8 @@
         justify-content: end;
         align-items: center;
     }
-    
-    .app-header .right_contents .login_sec > a{
+
+    .app-header .right_contents .login_sec>a {
         max-width: 100%;
         min-width: 100%;
         height: 25px;
@@ -223,12 +230,12 @@
     }
 
     .app-header .m_login,
-    .app-header .burger{
-        all:unset !important;
+    .app-header .burger {
+        all: unset !important;
         display: flex !important;
     }
 
-    .app-header .right_contents .login_sec .loginInfo > .burger{
+    .app-header .right_contents .login_sec .loginInfo>.burger {
         position: absolute;
         right: 0px !important;
         width: 30px !important;
@@ -237,15 +244,15 @@
 
     .app-header .login,
     .loginInfo .info,
-    .loginInfo .smile{
+    .loginInfo .smile {
         display: none !important;
     }
-    
-    .app-header .hide{
+
+    .app-header .hide {
         bottom: -300px;
     }
 
-    .app-header .hide .menu_sec a{
+    .app-header .hide .menu_sec a {
         padding: 10px;
     }
 }

@@ -1,4 +1,4 @@
-<div class="section1">
+<div class="section1" data-loginAddr="<%= user.address %>">
     <div class="sction_main_wrap">
         <div class="tit_wrap">
             <div class="logo">
@@ -20,14 +20,23 @@
     <div class="my_refer_wrap">
         <div class="refer">
             <span class="code_tit"> My Referral code</span>
-            <sapn class="code">dfjdkjfkljskdjflkasjfl</sapn>
-            <span class="oncopy copy_to_clipboard" data-copy-text="dfjdkjfkljskdjflkasjfl">copy</span>
+            <sapn class="code">
+                <% if(isLogin){ %>
+                    http://1.234.112.72:3784?referer=<%= user.id %>
+                <% } else { %>
+                    Please Login
+                <% } %> 
+            </sapn>
+            <span class="oncopy copy_to_clipboard" 
+            data-copy-text="<% if(isLogin) { %>http://1.234.112.72:3784?referer=<%= user.id %><% } else { %>Please Login<% } %>">
+                copy
+            </span>
         </div>
 
         <% if(isLogin){ %>
             <div class="claim_btn">CLAIM</div>
         <% } else { %>
-            <div class="login_btn" onclick="signTwitter()">CONNECT</div>
+            <a class="login_btn" href="#" onclick="signTwitter()">CONNECT</a>
         <% } %> 
     </div>
 
@@ -37,7 +46,7 @@
             <% Array.from({ length: 7 }).forEach(function(_, i) { %>
                 <% if(i > 3){ %>
                     <!-- 비활성화 -->
-                    <div class="disable" onclick="requestAttendance()">
+                    <div class="disable" onclick="attendance()">
                         <img src="/img/day_back_non.svg" alt=""/>
 
                         <div>
@@ -60,9 +69,36 @@
 
         <!-- web 출석체크 ver -->
         <div class="daily_wrap_contents">
-            <% Array.from({ length: 7 }).forEach(function(_, i) { %>
+            <% Array.from({ length: 7 }).forEach(function(_, i) { %>'
+                <% if(attd.continuityAttd  === 0 || attd.continuityAttd === 7 ){ %>
+                    <div class="disable" onclick="attendance()">
+                        <img src="/img/day_back_non.svg" alt=""/>
+                        <div>
+                            <div class="day">Day <%= i + 1 %></div>
+                            <div class="point">+ 1</div>
+                        </div>
+                    </div>
+                <% } else if ( i > attd.continuityAttd ) { %>
+                    <div class="disable" onclick="attendance()">
+                        <img src="/img/day_back_non.svg" alt=""/>
+                        <div>
+                            <div class="day">Day <%= i + 1 %></div>
+                            <div class="point">+ 1</div>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="active">
+                        <img src="/img/day_back_active.svg" alt=""/>
+                        <div>
+                            <div class="point"> +<%= i + 1 %></div>
+                        </div>
+                    </div>
+                <% } %>
+            <% }); %>
+
+            <!-- <% Array.from({ length: 7 }).forEach(function(_, i) { %>
                 <% if(i > 3){ %>
-                    <div class="disable"  onclick="requestAttendance()">
+                    <div class="disable"  onclick="attendance()">
                         <img src="/img/day_back_non.svg" alt=""/>
 
                         <div>
@@ -79,7 +115,7 @@
                         </div>
                     </div>
                 <% } %> 
-            <% }); %>
+            <% }); %> -->
         </div>
     </div>
 </div>

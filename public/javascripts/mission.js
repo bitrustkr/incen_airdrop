@@ -1,367 +1,374 @@
-function copyRewardLink(text){
-    navigator.clipboard.writeText(text).then(function() {
-        $("#confirm").css("display", "block");
-        $("#confirm .title").append('The link has been copied. Please visit the copied site through Chrome or Safari.');
-    }).catch(function(error) {
-        $("#error").css("display", "block");
+const section2 = document.querySelector(".section2");
+const loginAddr = document
+  .querySelector(".section1")
+  .getAttribute("data-loginAddr");
+const isLogin = section2.getAttribute("data-login");
+
+// console.log(isLogin);
+// console.log(typeof isLogin);
+
+function getMissions() {
+  let connect = JSON.parse(section2.getAttribute("data-connect"));
+  let twitter = JSON.parse(section2.getAttribute("data-twitter"));
+  let discord = JSON.parse(section2.getAttribute("data-discord"));
+  let test = JSON.parse(section2.getAttribute("data-test"));
+
+  let connectTask = "";
+  let tweetTask = "";
+  let dicoTask = "";
+  let testTask = "";
+
+  // connect
+  connect.forEach((data) => {
+    console.log(data.type);
+
+    if (isLogin === "true") {
+      switch (data.type) {
+        case "metamask":
+          taskButton = `<a href="#" class="m_btn connect" onclick="connectMetamask()'>CONNECT</a>`;
+          break;
+
+        case "homepage":
+          taskButton = `<a href="#" class="m_btn connect" onclick="joinHompage(${data.id},'${data.link}')">CONNECT</a>`;
+          break;
+
+        default:
+          taskButton = `<a href="${data.link}" class="m_btn connect">CONNECT</a>`;
+          break;
+      }
+
+      connectTask += `
+        <div>
+            <div class="left">
+                <div class="poin">+${data.point}</div>
+                <div class="mission">${data.title}</div>
+            </div>
+
+            ${
+              data.complete === 0
+                ? taskButton
+                : `<div class="m_btn completed">completed</div>`
+            }  
+        </div>
+      `;
+    } else {
+      connectTask += `
+        <div>
+            <div class="left">
+                <div class="poin">+${data.point}</div>
+                <div class="mission">${data.title}</div>
+            </div>
+
+            
+            <div class="m_btn connect" onclick="signTwitter()">CONNECT</div>
+        </div>
+      `;
+    }
+  });
+
+  $(".mission_list.connect").append(connectTask);
+
+  //twitter
+  twitter.forEach((data) => {
+    console.log("twitter::", data);
+
+    if (isLogin === "true") {
+      let taskButton = ``;
+
+      switch (data.link) {
+        case "/twitter/follow":
+          taskButton = `<a class="m_btn connect" href="/twitter/follow?missionNum=${data.id}">Follow</a>`;
+          break;
+        case "/twitter/like":
+          taskButton = `<a class="m_btn connect" href="/twitter/like?missionNum=${data.id}">Like</a>`;
+          break;
+        case "/twitter/retweet":
+          taskButton = `<a class="m_btn connect" href="/twitter/retweet?missionNum=${data.id}">Retweet</a>`;
+          break;
+      }
+
+      tweetTask += `
+        <div>
+            <div class="left">
+                <div class="poin">+${data.point}</div>
+                <div class="mission">${data.title}</div>
+            </div>
+    
+            ${
+              data.complete === 0
+                ? taskButton
+                : `<div class="m_btn completed">completed</div>`
+            }  
+        </div>
+      `;
+    } else {
+      tweetTask += `
+        <div>
+            <div class="left">
+                <div class="poin">+${data.point}</div>
+                <div class="mission">${data.title}</div>
+            </div>
+
+            
+            <div class="m_btn connect" onclick="signTwitter()">CONNECT</div>
+        </div>
+      `;
+    }
+  });
+
+  $(".mission_list.twitter").append(tweetTask);
+
+  // discord
+  discord.forEach((data) => {
+    console.log("discord::", data);
+
+    if (isLogin === "true") {
+      let taskButton = ``;
+
+      switch (data.link) {
+        case "/discord/join":
+          taskButton = `<a class="m_btn connect" href="/discord/join?missionNum=${data.id}">Join</a>`;
+          break;
+        default:
+          taskButton = `<a class="m_btn connect" href="${data.link}">Test Role Check</a>`;
+          break;
+      }
+
+      dicoTask += `
+        <div>
+            <div class="left">
+                <div class="poin">+${data.point}</div>
+                <div class="mission">${data.title}</div>
+            </div>
+    
+            ${
+              data.complete === 0
+                ? taskButton
+                : `<div class="m_btn completed">completed</div>`
+            }  
+        </div>
+      `;
+    } else {
+      dicoTask += `
+        <div>
+            <div class="left">
+                <div class="poin">+${data.point}</div>
+                <div class="mission">${data.title}</div>
+            </div>
+
+            
+            <div class="m_btn connect" onclick="signTwitter()">CONNECT</div>
+        </div>
+      `;
+    }
+  });
+
+  $(".mission_list.discord").append(dicoTask);
+
+  // test
+  test.forEach((data) => {
+    console.log("test::", data);
+
+    if (isLogin === "true") {
+      testTask += `
+        <div>
+            <div class="left">
+                <div class="poin">+${data.point}</div>
+                <div class="mission">${data.title}</div>
+            </div>
+
+            ${
+              data.complete === 0
+                ? `<div class="m_btn connect">CONNECT</div>`
+                : `<div class="m_btn completed">completed</div>`
+            }  
+        </div>
+      `;
+    } else {
+      testTask += `
+        <div>
+            <div class="left">
+                <div class="poin">+${data.point}</div>
+                <div class="mission">${data.title}</div>
+            </div>
+
+            
+            <div class="m_btn connect" onclick="signTwitter()">CONNECT</div>
+        </div>
+      `;
+    }
+  });
+
+  $(".mission_list.test").append(testTask);
+}
+
+function repeatComplete() {
+  var missionNum = 18;
+
+  axios
+    .post("/mission/repeatComplete", { missionNum: missionNum })
+    .then(function (response) {
+      alert(JSON.stringify(response.data));
     });
 }
 
-function getMissions(type){
-    axios.get(`/mission/missionList?category=${type}`)
-    .then(function(res){
-        let unclearArray = [...res.data.unclear];
-        let clearArray = [...res.data.clear];
+// 출석체크
+async function attendance() {
+  console.log(123);
+  console.log(isLogin);
+  console.log(typeof isLogin);
 
-        let taskInfo = ''
-        localStorage.setItem(`attendanceCnt`, res.data.attendanceCnt);
+  if (isLogin === "false") {
+    $("#confirm").css("display", "block");
+    $("#confirm .title").append("Please Login");
 
-        unclearArray.forEach(function (data) {  
-            if (data.type === "attendance") {
-                taskInfo += 
-                `
-                <div class="item">
-                    <div class="point">
-                        <div>+${data.point} point</div>
-                        <div>Daily</div>
-                    </div>
-                
-                    <div class="reward_img">
-                        <img src="/img/daily.png" alt=""/>
-                    </div>
-                
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go" onclick="confirmAttendance(${
-                        data.id
-                      })">
-                        <img src="/img/go.png" alt=""/>
-                    </div>
-                </div>
-                `
-              ;
-            } else if (data.type === "discord") {
-                if(data.link === '/discord/join') {
-                  taskInfo += 
-                  `
-                  <div class="item">
-                      <div class="point">
-                          <div>+${data.point} point</div>
-                          <div>Season</div>
-                      </div>
-                  
-                      <div class="reward_img">
-                          <img src="/img/daily.png" alt=""/>
-                      </div>
-                  
-                      <div class="reward_tit">
-                          ${data.title}
-                      </div>
-                      
-                      <div class="reward_go" onclick="window.location.href='${data.link}?missionNum=${data.id}'">
-                          <img src="/img/go.png" alt=""/>
-                      </div>
-                  </div>
-                  `;
-                } else {
-                  taskInfo += 
-                  `
-                  <div class="item">
-                      <div class="point">
-                          <div>+${data.point} point</div>
-                          <div>Season</div>
-                      </div>
-                  
-                      <div class="reward_img">
-                         <img src="${data.id === 18 ? '/img/sui.png' : '/img/daily.png'}" alt="" />
-                      </div>
-                  
-                      <div class=${data.id === 18 ? 'sui' : 'none'}>
-                            BONUS : SUI 3~329
-                      </div>  
+    return;
+  }
 
-                      <div class="reward_tit">
-                          ${data.title}
-                      </div>
-                      
-                      <div class="reward_go" onclick="window.location.href='${data.link}'">
-                          <img src="/img/go.png" alt=""/>
-                      </div>
-                  </div>
-                  `;
-                }
-              } else if (data.type === "twitter") {
-              if(data.link === '/twitter/like' || data.link === '/twitter/follow' || data.link === '/twitter/retweet' ) {
-                taskInfo += 
-                `
-                <div class="item">
-                    <div class="point">
-                        <div>+${data.point} point</div>
-                        <div>Season</div>
-                    </div>
-                
-                    <div class="reward_img">
-                        <img src="/img/daily.png" alt=""/>
-                    </div>
-                
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go" onclick="window.location.href='${data.link}?missionNum=${data.id}'">
-                        <img src="/img/go.png" alt=""/>
-                    </div>
-                </div>
-                `;
-              } else {
-                taskInfo += 
-                `
-                <div class="item">
-                    <div class="point">
-                        <div>+${data.point} point</div>
-                        <div>Season</div>
-                    </div>
-                
-                    <div class="reward_img">
-                        <img src="/img/daily.png" alt=""/>
-                    </div>
-                
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go" onclick="window.location.href='${data.link}'">
-                        <img src="/img/go.png" alt=""/>
-                    </div>
-                </div>
-                `;
-              }
-            } else if (data.type === "homepage") {
-                taskInfo += 
-                `
-                <div class="item">
-                    <div class="point">
-                        <div>+${data.point} point</div>
-                        <div>Season</div>
-                    </div>
-                
-                    <div class="reward_img">
-                        <img src="/img/daily.png" alt=""/>
-                    </div>
-                
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go" onclick="joinHompage(${data.id},'${data.link}')">
-                        <img src="/img/go.png" alt=""/>
-                    </div>
-                </div>
-                `;
-            } else if (data.type === "holder") {
-                taskInfo += 
-                `
-                <div class="item">
-                    <div class="point">
-                        <div>+${data.point} point</div>
-                        <div>Season</div>
-                    </div>
-                
-                    <div class="reward_img">
-                        <img src="/img/daily.png" alt=""/>
-                    </div>
-                
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go" onclick="checkNotifyHolder(${data.id},'${data.category}','holder')">
-                        <img src="/img/go.png" alt=""/>
-                    </div>
-                </div>
-                `
-            } else if (data.type === "coupon") {
-                taskInfo += 
-                `
-                <div class="item">
-                    <div class="point">
-                        <div>+${data.point} point</div>
-                        <div>Season</div>
-                    </div>
+  var signature;
+  var contractAddr = "0x9d42388a4141440e02dc36c415e2045a64a5af76";
+  try {
+    web3 = new Web3(web3.currentProvider);
+  } catch (error) {
+    window.open(
+      "https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=ko&pli=1"
+    );
 
-                    <div class="reward_img">
-                        <img src="${data.id === 17 ? '/img/sui.png' : '/img/daily.png'}" alt="" />
-                    </div>
+    return;
+  }
 
-                    <div class=${data.id === 17 ? 'sui' : 'none'}>
-                        BONUS : SUI 1.5~120
-                    </div>  
-                
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go" onclick="openCoponCodeInput(${data.id})">
-                        <img src="/img/go.png" alt=""/>
-                    </div>
-                </div>
-                `
-            } else if (data.type === "clear") {
-                taskInfo += 
-                `
-                <div class="item">
-                    <div class="point">
-                        <div>+${data.point} point</div>
-                        <div>Season</div>
-                    </div>
-                
-                    <div class="reward_img">
-                        <img src="/img/daily.png" alt=""/>
-                    </div>
-                
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go" onclick="checkNotifyHolder(${data.id},'${data.category}','clear')">
-                        <img src="/img/go.png" alt=""/>
-                    </div>
-                </div>
-                `
-            } else {
-                taskInfo += 
-                `
-                <div class="item">
-                    <div class="point">
-                        <div>+${data.point} point</div>
-                        <div>Season</div>
-                    </div>
-                
-                    <div class="reward_img">
-                        <img src="/img/daily.png" alt=""/>
-                    </div>
-                
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go" onclick="window.location.href='${data.link}'">
-                        <img src="/img/go.png" alt=""/>
-                    </div>
-                </div>
-                `;
-              }
-        });
-        
-        clearArray.forEach(function (data) {
-            if (data.type === "attendance") {
-                taskInfo += 
-                `
-                <div class="item disable">
-                    <div class="point disable">
-                        <div>+${data.point} point</div>
-                        <div>Daily</div>
-                    </div>
+  let chainId = 5611;
+  const currentNetworkId = await ethereum.request({ method: "net_version" });
 
-                    <div class="reward_img disable">
-                        <img src="${data.id === 17 || data.id === 18 ? '/img/sui.png' : '/img/daily.png'}" alt="" />
-                    </div>
+  if (currentNetworkId !== chainId) {
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: web3.utils.toHex(chainId) }],
+      });
+    } catch (error) {
+      window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [
+          {
+            chainId: "0x15eb",
+            rpcUrls: ["https://opbnb-testnet-rpc.bnbchain.org"],
+            chainName: "opBNB Testnet",
+            nativeCurrency: {
+              name: "Test opBinance Coin",
+              symbol: "tBNB",
+              decimals: 18,
+            },
+            blockExplorerUrls: ["https://opbnb-testnet.bscscan.com/"],
+          },
+        ],
+      });
 
-                    <div class=${data.id === 17 || data.id === 18 ? 'sui' : 'none'}>
-                        ${data.id === 17 ? 'BONUS : SUI 1.5~120': 'BONUS : SUI 3~329'}
-                    </div>  
+      return;
+    }
+  }
 
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go">
-                        <img src="/img/go_disable.png" alt=""/>
-                    </div>
-                </div>
-                `;
-            } else if(data.rewardLink) {
-                taskInfo += 
-                `
-                <div class="item disable">
-                    <div class="point disable">
-                        <div>+${data.point} point</div>
-                        <div>Season</div>
-                    </div>
+  if (!localStorage.getItem("metaSignature")) {
+    var typedData = {
+      types: {
+        EIP712Domain: [
+          { name: "name", type: "string" },
+          { name: "version", type: "string" },
+          { name: "chainId", type: "uint256" },
+          { name: "verifyingContract", type: "address" },
+        ],
+        Content: [
+          { name: "message", type: "string" },
+          { name: "account", type: "address" },
+        ],
+      },
+      domain: {
+        name: "1.234.112.72",
+        version: "1",
+        chainId: chainId,
+        verifyingContract: contractAddr, // 사용할 컨트랙트 주소 입력 마켓컨트랙트, 라우터컨트랙트
+      },
+      primaryType: "Content",
+      message: {
+        message: "Welcome!",
+        account: loginAddr,
+      },
+    };
 
-                    <div class="reward_img disable">
-                        <img src="${data.id === 17 || data.id === 18 ? '/img/sui.png' : '/img/daily.png'}" alt="" />
-                    </div>
-    
-                    <div class=${data.id === 17 || data.id === 18 ? 'sui' : 'none'}>
-                        ${data.id === 17 ? 'BONUS : SUI 1.5~120': 'BONUS : SUI 3~329'}
-                    </div>  
+    // 메타마스크로 서명시작
+    signature = await window.ethereum.request({
+      method: "eth_signTypedData_v4",
+      params: [loginAddr, JSON.stringify(typedData)],
+    });
 
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <a class="reward_go" onclick="copyRewardLink('${data.rewardLink}');" target="_blank">
-                        <img src="${data.id === 17 || data.id === 18 ? '/img/link.png' : '/img/go.png'}" alt=""/>
-                    </a>
-                </div>
-                `;
-            } else{
-                taskInfo += 
-                `
-                <div class="item disable">
-                    <div class="point disable">
-                        <div>+${data.point} point</div>
-                        <div>Season</div>
-                    </div>
+    console.log("signature::", signature);
+  } else {
+    signature = localStorage.getItem("metaSignature");
+    console.log(1);
+  }
 
-                    <div class="reward_img disable">
-                        <img src="${data.id === 17 || data.id === 18 ? '/img/sui.png' : '/img/daily.png'}" alt="" />
-                    </div>
+  var sign = signature.substring(2);
+  var r = "0x" + sign.substring(0, 64);
+  var s = "0x" + sign.substring(64, 128);
+  var v = parseInt(sign.substring(128, 130), 16);
 
-                    <div class=${data.id === 17 || data.id === 18 ? 'sui' : 'none'}>
-                        ${data.id === 17 ? 'BONUS : SUI 1.5~120': 'BONUS : SUI 3~329'}
-                    </div>  
+  var contract = new web3.eth.Contract(signAbi, contractAddr);
 
-                    <div class="reward_tit">
-                        ${data.title}
-                    </div>
-                    
-                    <div class="reward_go">
-                        <img src="/img/go_disable.png" alt=""/>
-                    </div>
-                </div>
-                `;
-            }
-        });
-        
-        $(".mission_list").append(taskInfo);
-    })
-}
+  var val = "1000000000000000";
+  val = web3.utils.numberToHex(val);
 
-function repeatComplete(){
-    var missionNum = 18;
-    
-    axios.post('/mission/repeatComplete',{missionNum : missionNum})
-    .then(function(response){
-        alert(JSON.stringify(response.data));
-    })
+  var to = contractAddr;
+  var trxParams = {
+    from: ethereum.selectedAddress,
+    value: val,
+  };
+
+  var gas = await contract.methods.check(v, r, s).estimateGas(trxParams);
+
+  var data = await web3.eth.abi.encodeFunctionCall(checkAbi, [v, r, s]);
+
+  trxParams = {
+    to: to,
+    from: ethereum.selectedAddress,
+    value: val,
+    gas: gas,
+    data: data,
+  };
+
+  var rst = await web3.eth.sendTransaction(trxParams);
+  console.log(rst.transactionHash);
+
+  var rst = await axios.post(`/wallet/attendance`, {
+    txid: rst.transactionHash,
+  });
+
+  if (rst.data.result) {
+    window.location.href = "/test?modal=success";
+  } else {
+    console.log("error::", rst.data.message);
+  }
 }
 
 $(document).ready(function () {
-    // getMissions('ALL');
+  getMissions();
 
-    // $(".reward_type div").click(function() {
-    //     $(".mission_list").empty();
-    //     $(".content_item").empty();
-        
-    //     var type = $(this).data('type');
-    //     $(".reward_type div").removeClass("active");
-    //     $(this).addClass("active");
+  // Parse URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const modalParam = urlParams.get("modal");
 
-    //     getMissions(type);
-    // });
+  // Check if modal=complete exists in the URL
+  if (modalParam === "complete") {
+    $("#confirm").css("display", "block");
+    $("#confirm .coin").append(`<img src="/img/coin.png" alt="">`);
+    $("#confirm .title").append("COMPLETE!"); // Show the modal
+  }
+
+  if (modalParam === "error") {
+    const params = new URLSearchParams(window.location.search);
+    const message = params.get("message");
+
+    $("#confirm").css("display", "block");
+    $("#confirm .coin").append(`<img src="/img/coin.png" alt="">`);
+    $("#confirm .title").append(`<p>Error!"</p><p>${message}</p<>`); // Show the modal
+  }
 });
-  
