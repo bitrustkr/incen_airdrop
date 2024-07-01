@@ -335,6 +335,14 @@ body {
         font-size: 12px;
     }
 
+    .section1 .my_refer_wrap .refer .code {
+        display: block;
+        width: 80px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .section1 .my_refer_wrap .refer .code_tit {
         font-size: 10px;
         font-family: 'GmarketSansBold';

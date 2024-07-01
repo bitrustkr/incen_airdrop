@@ -11,11 +11,13 @@ function getMissions() {
   let connect = JSON.parse(section2.getAttribute("data-connect"));
   let twitter = JSON.parse(section2.getAttribute("data-twitter"));
   let discord = JSON.parse(section2.getAttribute("data-discord"));
+  let invite = JSON.parse(section2.getAttribute("data-invite"));
   let test = JSON.parse(section2.getAttribute("data-test"));
 
   let connectTask = "";
   let tweetTask = "";
   let dicoTask = "";
+  let inviteTask = "";
   let testTask = "";
 
   // connect
@@ -25,7 +27,7 @@ function getMissions() {
     if (isLogin === "true") {
       switch (data.type) {
         case "metamask":
-          taskButton = `<a href="#" class="m_btn connect" onclick="connectMetamask()'>CONNECT</a>`;
+          taskButton = `<a href="#" class="m_btn connect" onclick="connectMetamask()">CONNECT</a>`;
           break;
 
         case "homepage":
@@ -39,18 +41,19 @@ function getMissions() {
 
       connectTask += `
         <div>
-            <div class="left">
-                <div class="poin">+${data.point}</div>
-                <div class="mission">${data.title}</div>
-            </div>
-
-            ${
-              data.complete === 0
-                ? taskButton
-                : `<div class="m_btn completed">completed</div>`
-            }  
+          <div class="left">
+            <div class="poin">+${data.point}</div>
+            <div class="mission">${data.title}</div>
+          </div>
+          ${
+            data.complete === 0
+              ? taskButton
+              : '<div class="m_btn completed">completed</div>'
+          }
         </div>
       `;
+
+      console.log("rrwerew", taskButton);
     } else {
       connectTask += `
         <div>
@@ -156,7 +159,6 @@ function getMissions() {
                 <div class="mission">${data.title}</div>
             </div>
 
-            
             <div class="m_btn connect" onclick="signTwitter()">CONNECT</div>
         </div>
       `;
@@ -165,12 +167,11 @@ function getMissions() {
 
   $(".mission_list.discord").append(dicoTask);
 
-  // test
-  test.forEach((data) => {
-    console.log("test::", data);
+  invite.forEach((data) => {
+    console.log("invite::", data);
 
     if (isLogin === "true") {
-      testTask += `
+      inviteTask += `
         <div>
             <div class="left">
                 <div class="poin">+${data.point}</div>
@@ -179,13 +180,13 @@ function getMissions() {
 
             ${
               data.complete === 0
-                ? `<div class="m_btn connect">CONNECT</div>`
+                ? `<div class="m_btn connect" onclick="invite(${data.id},'${data.link}')">CONNECT</div>`
                 : `<div class="m_btn completed">completed</div>`
             }  
         </div>
       `;
     } else {
-      testTask += `
+      inviteTask += `
         <div>
             <div class="left">
                 <div class="poin">+${data.point}</div>
@@ -199,7 +200,7 @@ function getMissions() {
     }
   });
 
-  $(".mission_list.test").append(testTask);
+  $(".mission_list.invite").append(inviteTask);
 }
 
 function repeatComplete() {
@@ -211,15 +212,24 @@ function repeatComplete() {
       alert(JSON.stringify(response.data));
     });
 }
+// invite
+async function invite(id, link) {
+  axios.post(link, { missionNum: id }).then(function (res) {
+    if (res.data.result) {
+      window.open(res.data.url);
+      location.href = location.href;
+    } else {
+      $("#confirm").css("display", "block");
+      $("#confirm .title").append(res.data.message);
+    }
+  });
+}
 
 // 출석체크
 async function attendance() {
   const todayAttd = document
     .querySelector(".daily_wrap_contents")
     .getAttribute("data-today-attd");
-
-  console.log(todayAttd);
-  console.log(typeof todayAttd);
 
   if (isLogin === "false") {
     $("#confirm").css("display", "block");
@@ -355,7 +365,7 @@ async function attendance() {
   });
 
   if (rst.data.result) {
-    window.location.href = "/test?modal=success";
+    window.location.href = "?modal=complete";
   } else {
     console.log("error::", rst.data.message);
   }

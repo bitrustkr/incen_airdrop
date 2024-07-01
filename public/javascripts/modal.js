@@ -373,7 +373,6 @@ $(document).ready(function () {
 
 //-------------------------------------------------------------------
 // 로그인
-
 async function signTwitter() {
   const urlParams = new URLSearchParams(window.location.search);
   const referralParam = urlParams.get("referral");
@@ -390,7 +389,7 @@ function disconnectTwitter() {
   console.log("disconnectTwitter");
 
   localStorage.removeItem("metaSignature");
-  location.href = "/test/logout";
+  location.href = "/users/logout";
 }
 
 //메타마스크 연동
@@ -576,9 +575,10 @@ async function connectMetamask() {
 
   if (rst.data.result) {
     localStorage.setItem("metaSignature", signature);
-    window.location.href = "/test";
+    window.location.href = "/";
   } else {
-    console.log("error::", rst.data.message);
+    $("#confirm").css("display", "block");
+    $("#confirm .title").append(rst.data.message);
   }
 }
 
