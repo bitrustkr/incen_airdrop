@@ -73,7 +73,7 @@ router.post("/connect", async (req, res, next) => {
 
       var qry = `
           SELECT
-              id, address, point
+              id, address, point, referral_id, referral_point
           FROM
               users 
           WHERE
@@ -177,6 +177,50 @@ router.post("/connect", async (req, res, next) => {
       if(updateRst.affectedRows != 1) {
           result.message = 'update point error';
           throw new Error("update point error");
+      }
+
+      if(userRst[0].referral_id){
+          qry = `
+              UPDATE
+                  users
+              SET
+                  referral_point = referral_point + 4
+              WHERE
+                  id = ?
+          `;
+          params = [req.user.id];
+  
+          updateRst = await db.dbQuery(qry, params, con);
+  
+          if(updateRst.affectedRows != 1) {
+              console.log('update user.referral_point error');
+  
+              await db.transRollback(con);
+  
+              return res.redirect('/?modal=error&message=' + encodeURIComponent('update error.'));
+          }
+
+          if(userRst[0].referral_point == 3) {
+              qry = `
+                  UPDATE
+                      users
+                  SET
+                      referral_count = referral_count + 1
+                  WHERE
+                      id = ?
+              `;
+              params = [userRst[0].referral_id];
+      
+              updateRst = await db.dbQuery(qry, params, con);
+      
+              if(updateRst.affectedRows != 1) {
+                  console.log('update user.referral_count error');
+      
+                  await db.transRollback(con);
+      
+                  return res.redirect('/?modal=error&message=' + encodeURIComponent('update error.'));
+              }
+          }
       }
 
       await db.transEnd(con);

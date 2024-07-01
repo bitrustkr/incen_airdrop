@@ -269,7 +269,7 @@ router.get(
 
         var qry = `
             SELECT
-                provider, point, address, discord_id
+                provider, point, address, discord_id, referral_id, referral_point
             FROM users
             WHERE
                 id = ?
@@ -427,6 +427,50 @@ router.get(
             await db.transRollback(con);
 
             return res.redirect('/?modal=error&message=' + encodeURIComponent('update error.'));
+        }
+
+        if(userRst[0].referral_id){
+            qry = `
+                UPDATE
+                    users
+                SET
+                    referral_point = referral_point + 1
+                WHERE
+                    id = ?
+            `;
+            params = [req.user.id];
+    
+            updateRst = await db.dbQuery(qry, params, con);
+    
+            if(updateRst.affectedRows != 1) {
+                console.log('update user.referral_point error');
+    
+                await db.transRollback(con);
+    
+                return res.redirect('/?modal=error&message=' + encodeURIComponent('update error.'));
+            }
+
+            if(userRst[0].referral_point == 6) {
+                qry = `
+                    UPDATE
+                        users
+                    SET
+                        referral_count = referral_count + 1
+                    WHERE
+                        id = ?
+                `;
+                params = [userRst[0].referral_id];
+        
+                updateRst = await db.dbQuery(qry, params, con);
+        
+                if(updateRst.affectedRows != 1) {
+                    console.log('update user.referral_count error');
+        
+                    await db.transRollback(con);
+        
+                    return res.redirect('/?modal=error&message=' + encodeURIComponent('update error.'));
+                }
+            }
         }
 
         await db.transEnd(con);

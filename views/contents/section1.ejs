@@ -30,13 +30,13 @@
             <span class="code_tit"> My Referral code</span>
             <sapn class="code">
                 <% if(isLogin){ %>
-                    http://1.234.112.72:3784?referer=<%= user.id %>
+                    http://1.234.112.72:3784?referral=<%= user.id %>
                 <% } else { %>
                     Please Login
                 <% } %> 
             </sapn>
             <span class="oncopy copy_to_clipboard" 
-            data-copy-text="<% if(isLogin) { %>http://1.234.112.72:3784?referer=<%= user.id %><% } else { %>Please Login<% } %>">
+            data-copy-text="<% if(isLogin) { %>http://1.234.112.72:3784?referral=<%= user.id %><% } else { %>Please Login<% } %>">
                 copy
             </span>
         </div>

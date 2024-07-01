@@ -252,7 +252,7 @@ router.post('/homepage', async function(req, res, next) {
         con = await db.transBegin();
         qry = `
             SELECT
-                id, point
+                id, point, referral_id, referral_point
             FROM 
                 users
             WHERE
@@ -300,6 +300,50 @@ router.post('/homepage', async function(req, res, next) {
         if(updateRst.affectedRows != 1) {
             result.message = 'update point error';
             throw new Error("update point error");
+        }
+
+        if(missionRst[0].value2 == 'telegram' && userRst[0].referral_id){
+            qry = `
+                UPDATE
+                    users
+                SET
+                    referral_point = referral_point + 2
+                WHERE
+                    id = ?
+            `;
+            params = [req.user.id];
+    
+            updateRst = await db.dbQuery(qry, params, con);
+    
+            if(updateRst.affectedRows != 1) {
+                console.log('update user.referral_point error');
+    
+                await db.transRollback(con);
+    
+                return res.redirect('/?modal=error&message=' + encodeURIComponent('update error.'));
+            }
+
+            if(userRst[0].referral_point == 5) {
+                qry = `
+                    UPDATE
+                        users
+                    SET
+                        referral_count = referral_count + 1
+                    WHERE
+                        id = ?
+                `;
+                params = [userRst[0].referral_id];
+        
+                updateRst = await db.dbQuery(qry, params, con);
+        
+                if(updateRst.affectedRows != 1) {
+                    console.log('update user.referral_count error');
+        
+                    await db.transRollback(con);
+        
+                    return res.redirect('/?modal=error&message=' + encodeURIComponent('update error.'));
+                }
+            }
         }
 
         qry = `

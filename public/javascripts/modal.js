@@ -376,10 +376,10 @@ $(document).ready(function () {
 
 async function signTwitter() {
   const urlParams = new URLSearchParams(window.location.search);
-  const refererParam = urlParams.get("referer");
+  const referralParam = urlParams.get("referral");
 
-  if (refererParam) {
-    location.href = `/users/login?referer=${refererParam}`;
+  if (referralParam) {
+    location.href = `/users/login?referral=${referralParam}`;
   } else {
     location.href = "/users/login";
   }

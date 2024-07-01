@@ -196,20 +196,40 @@ passport.use(
                 
                 // 회원 등록
                 if(rst.length == 0){
-                    // to-do referer
-                    qry = `
-                        INSERT INTO 
-                            users
-                        (
-                            provider, provider_id, name
-                        )
-                        VALUES
-                        (
-                            ?, ?, ?
-                        )
-                    `;
+                    // to-do referral
+                    var referral = req.body.referral;
 
-                    params = ['twitter', req.body.id, req.body.username];
+                    if(referral){
+                    
+                        qry = `
+                            INSERT INTO 
+                                users
+                            (
+                                provider, provider_id, name, referral_id
+                            )
+                            VALUES
+                            (
+                                ?, ?, ?, ?
+                            )
+                        `;
+    
+                        params = ['twitter', req.body.id, req.body.username, referral];
+                    }else{
+                    
+                        qry = `
+                            INSERT INTO 
+                                users
+                            (
+                                provider, provider_id, name
+                            )
+                            VALUES
+                            (
+                                ?, ?, ?
+                            )
+                        `;
+    
+                        params = ['twitter', req.body.id, req.body.username];
+                    }
 
                     rst = await db.dbQuery(qry, params);
               

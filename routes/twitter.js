@@ -9,6 +9,22 @@ router.get(
     var code = req.query.code;
     try{
 
+        var state = req.query.state;
+        state = state.split("_");
+        console.log(state);
+
+        var referral = false;
+        if(state[1] != 0) {
+            if(!await common.validateNum(state[1])) {
+                console.log('validate error : referral');
+                console.log(state[1]);
+
+                return res.redirect('/?modal=error&message=' + encodeURIComponent('validate error : referral.'));
+            }
+
+            referral = state[1];
+        }
+
         var tokenResp = await axios.post('https://api.twitter.com/2/oauth2/token', {
           code: code,
           grant_type: 'authorization_code',
@@ -41,6 +57,7 @@ router.get(
         req.body.access_token = tokenResp.data.access_token;
         req.body.name = resp.data.data.name;
         req.body.username = resp.data.data.username;
+        req.body.referral = referral;
 
         //localstrategy를 찾아 실행한다.
         passport.authenticate('twitter', (authError, user, info) => {
@@ -682,7 +699,7 @@ router.get(
         await db.transEnd(con);
 
         req.session.passport.user.point = req.session.passport.user.point + missionRst[0].point;
-        
+
         url = 'https://twitter.com/intent/follow?user_id=' + missionRst[0].value;
     } catch(error) {
         console.log(error);
