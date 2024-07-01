@@ -9,14 +9,15 @@
   <h1>INCN</h1>
   <h1><%= isLogin %></h1>
   <% if(isLogin) { %>
-    <h3>referer : http://1.234.112.72:3784?referer=<%= user.id %></h3>
+    <h3>referral : http://1.234.112.72:3784?referral=<%= user.id %></h3>
     <h3>twitter id : <%= user.twitter_id %></h3>
     <h3>discord id : <%= user.discord_id %></h3>
     <h3>address : <%= user.address %></h3>
     <h3>point : <%= user.point %></h3>
     <h3>name : <%= user.name %></h3>
+    <h3 style = "color:red">My Referral : <%= user.referralCnt %></h3>
     <script>const loginAddr = "<%= user.address %>"; </script>
-    <a href = "/test/logout">log out</a><br/>
+    <a href = "/users/logout">log out</a><br/>
   <% } else { %>
     <a href = "/users/login">log in</a><br/>
     <script>const loginAddr = ""; </script>
@@ -42,6 +43,10 @@
   <%= JSON.stringify(mission['discord']) %>
   <br/>
   <br/>
+  <h3 style = "color:red">invite</h3>
+  <%= JSON.stringify(mission['invite']) %>
+  <br/>
+  <br/>
   <h1>Twitter</h1>
   <a href = "/twitter/like?missionNum=31">like</a><br/>
   <a href = "/twitter/retweet?missionNum=32">retweet</a><br/>
@@ -56,6 +61,10 @@
   <br/>
   <h1>Telegram</h1>
   <a href = "javascript:joinHompage(38,'/mission/homepage');">join</a><br/>
+  <br/>
+  <br/>
+  <h1 style = "color:red">Invite</h1>
+  <a href = "javascript:joinHompage(41,'/mission/invite');">invite 1 freind</a><br/>
   <br/>
   <br/>
   <h1>metamask</h1>

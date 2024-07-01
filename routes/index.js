@@ -22,6 +22,18 @@ router.get("/", async (req, res) => {
     };
 
     userId = req.user.id;
+    
+    // referral_count
+    qry = `
+      SELECT 
+          referral_count 
+      FROM users
+      WHERE id = ?
+    `;
+    params = [req.user.id];
+    userRst = await db.dbQuery(qry, params);
+
+    user.referralCnt = userRst[0].referral_count;
 
     // 연속 출석
     qry = `
@@ -118,6 +130,18 @@ router.get("/test", async (req, res) => {
     };
 
     userId = req.user.id;
+    
+    // referral_count
+    qry = `
+      SELECT 
+          referral_count 
+      FROM users
+      WHERE id = ?
+    `;
+    params = [req.user.id];
+    userRst = await db.dbQuery(qry, params);
+
+    user.referralCnt = userRst[0].referral_count;
 
     // 연속 출석
     qry = `

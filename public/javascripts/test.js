@@ -38,8 +38,14 @@ function joinHompage(id, link) {
   .post(link, { missionNum: id })
   .then(function (res) {
     if (res.data.result) {
-        window.open(res.data.url);
-        location.href = location.href;
+        if(link == '/mission/homepage'){
+            window.open(res.data.url);
+            location.href = location.href;
+        }else if(link == '/mission/invite'){
+            location.href = res.data.url;
+        }
+    }else{
+        console.log(res.data);
     }
   });
 }
