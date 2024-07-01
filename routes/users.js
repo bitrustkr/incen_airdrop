@@ -1,40 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', async function(req, res, next) {
-  var result = {
-    result : false
-  }
-
-  if (!req.isAuthenticated()) {
-    result.message = "Not logged in."
-    return res.json(result);
-  }
-
-  try{
-    var qry = `
-      SELECT
-          provider, name, point, address, provider_id as twitter_id, discord_id
-      FROM users
-      WHERE
-          id = ?
-    `;
-    var params = [req.user.id];
-  
-    var rst = await db.dbQuery(qry, params);
-    
-    result = {
-      result : true,
-      data : rst[0]
-    }
-  } catch(error) {
-    console.log(error);
-  }
-
-  res.json(result);
-});
-
 // login
 router.get("/login", async (req, res, next) => {
   var result = {

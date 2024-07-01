@@ -98,6 +98,8 @@ router.post("/connect", async (req, res, next) => {
         console.log(req.user.id);
         console.log(userRst[0].address);
 
+        await db.transRollback(con);
+
         return res.redirect('/?modal=error&message=' + encodeURIComponent('Your Metamask address has already been registered.'));
     }
 
@@ -137,6 +139,8 @@ router.post("/connect", async (req, res, next) => {
 
       if(completeRst.length > 0){
           result.message = 'You have already cleared it.';
+
+          await db.transRollback(con);
 
           return res.json(result);
       }
@@ -365,6 +369,8 @@ router.post("/attendance", async (req, res, next) => {
         console.log(req.user.id);
         console.log(userRst[0].address);
 
+        await db.transRollback(con);
+
         return res.redirect('/?modal=error&message=' + encodeURIComponent('Your Metamask address has been not registered.<br/>Please connect to Metamask address first.'));
     }
 
@@ -406,6 +412,8 @@ router.post("/attendance", async (req, res, next) => {
       if(completeRst.length > 0){
           result.message = 'You have already cleared it.';
 
+          await db.transRollback(con);
+
           return res.json(result);
       }
       
@@ -423,6 +431,8 @@ router.post("/attendance", async (req, res, next) => {
 
       if(completeRst.length > 0){
           result.message = 'You have already cleared it.';
+
+          await db.transRollback(con);
 
           return res.json(result);
       }

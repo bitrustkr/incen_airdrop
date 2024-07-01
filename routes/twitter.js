@@ -380,6 +380,9 @@ router.get(
         url = '/twitterSuccess?url=' + encodeURIComponent('https://twitter.com/intent/retweet?tweet_id=' + missionRst[0].value);
     } catch(error){
         console.log(error);
+        if(con != undefined){
+            await db.transRollback(con);
+        }
     }
     res.redirect(url);
   }
@@ -518,6 +521,9 @@ router.get(
 
     } catch(error){
         console.log(error);
+        if(con != undefined){
+            await db.transRollback(con);
+        }
     }
     res.redirect(url);
   }

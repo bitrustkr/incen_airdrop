@@ -213,8 +213,6 @@ router.get(
         if(missionRst.length == 0){
             console.log('not found mission.');
 
-            await db.transRollback(con);
-
             return res.redirect('/?modal=error&message=' + encodeURIComponent('not found mission.'));
         }
 
@@ -232,8 +230,6 @@ router.get(
 
         if(completeRst.length > 0){
             console.log('already complete mission.');
-
-            await db.transRollback(con);
 
             return res.redirect('/?modal=error&message=' + encodeURIComponent('already complete mission.'));
         }
