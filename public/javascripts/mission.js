@@ -394,6 +394,6 @@ $(document).ready(function () {
 
     $("#confirm").css("display", "block");
     $("#confirm .coin").append(`<img src="/img/coin.png" alt="">`);
-    $("#confirm .title").append(`<p>Error!"</p><p>${message}</p<>`);
+    $("#confirm .title").append(`<p>Error!</p><p>${message}</p<>`);
   }
 });
