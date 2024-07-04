@@ -27,15 +27,15 @@ function getMissions() {
     if (isLogin === "true") {
       switch (data.type) {
         case "metamask":
-          taskButton = `<a href="#" class="m_btn connect" onclick="connectMetamask()">CONNECT</a>`;
+          taskButton = `<a href="#" class="m_btn connect" onclick="connectMetamask()">Connect</a>`;
           break;
 
         case "homepage":
-          taskButton = `<a href="#" class="m_btn connect" onclick="joinHompage(${data.id},'${data.link}')">CONNECT</a>`;
+          taskButton = `<a href="#" class="m_btn connect" onclick="joinHompage(${data.id},'${data.link}')">Connect</a>`;
           break;
 
         default:
-          taskButton = `<a href="${data.link}" class="m_btn connect">CONNECT</a>`;
+          taskButton = `<a href="${data.link}" class="m_btn connect">Connect</a>`;
           break;
       }
 
@@ -48,7 +48,7 @@ function getMissions() {
           ${
             data.complete === 0
               ? taskButton
-              : '<div class="m_btn completed">completed</div>'
+              : '<div class="m_btn completed">Completed</div>'
           }
         </div>
       `;
@@ -63,7 +63,7 @@ function getMissions() {
             </div>
 
             
-            <div class="m_btn connect" onclick="signTwitter()">CONNECT</div>
+            <div class="m_btn connect" onclick="signTwitter()">Connect</div>
         </div>
       `;
     }
@@ -100,7 +100,7 @@ function getMissions() {
             ${
               data.complete === 0
                 ? taskButton
-                : `<div class="m_btn completed">completed</div>`
+                : `<div class="m_btn completed">Completed</div>`
             }  
         </div>
       `;
@@ -113,7 +113,7 @@ function getMissions() {
             </div>
 
             
-            <div class="m_btn connect" onclick="signTwitter()">CONNECT</div>
+            <div class="m_btn connect" onclick="signTwitter()">Connect</div>
         </div>
       `;
     }
@@ -147,7 +147,7 @@ function getMissions() {
             ${
               data.complete === 0
                 ? taskButton
-                : `<div class="m_btn completed">completed</div>`
+                : `<div class="m_btn completed">Completed</div>`
             }  
         </div>
       `;
@@ -159,7 +159,7 @@ function getMissions() {
                 <div class="mission">${data.title}</div>
             </div>
 
-            <div class="m_btn connect" onclick="signTwitter()">CONNECT</div>
+            <div class="m_btn connect" onclick="signTwitter()">Connect</div>
         </div>
       `;
     }
@@ -180,8 +180,8 @@ function getMissions() {
 
             ${
               data.complete === 0
-                ? `<div class="m_btn connect" onclick="invite(${data.id},'${data.link}')">CONNECT</div>`
-                : `<div class="m_btn completed">completed</div>`
+                ? `<div class="m_btn connect" onclick="invite(${data.id},'${data.link}')">Connect</div>`
+                : `<div class="m_btn completed">Completed</div>`
             }  
         </div>
       `;
@@ -194,7 +194,7 @@ function getMissions() {
             </div>
 
             
-            <div class="m_btn connect" onclick="signTwitter()">CONNECT</div>
+            <div class="m_btn connect" onclick="signTwitter()">Connect</div>
         </div>
       `;
     }

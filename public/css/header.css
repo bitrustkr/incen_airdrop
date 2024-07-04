@@ -182,6 +182,10 @@
     margin-top: 10px;
 }
 
+.app-header .hide .logout_btn:hover {
+    color: #000
+}
+
 .app-header .m_login,
 .app-header .burger {
     display: none !important;

@@ -22,6 +22,7 @@ body {
 .app_content_wrap_border {
     border: 30px solid rgba(255, 255, 255, 0.5);
     border-radius: 30px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .app_content_wrap {
@@ -116,17 +117,30 @@ body {
     cursor: pointer;
 }
 
+.section1 .my_refer_wrap .refer .code {
+    color: #bbb
+}
+
+.section1 .my_refer_wrap .refer .code.black {
+    color: #000
+}
+
 .section1 .my_refer_wrap .refer .oncopy {
     position: absolute;
     right: 0;
     top: 0;
     height: 100%;
+    min-width: 75px;
     background: #FFD543;
     display: flex;
     align-items: center;
     padding: 0 15px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.section1 .my_refer_wrap .refer .oncopy:hover {
+    font-family: 'GmarketSansBold';
 }
 
 .section1 .my_refer_wrap .login_btn {
@@ -215,7 +229,7 @@ body {
 .section1 .daily_wrap_contents .day {
     font-size: 18px;
     font-family: 'GmarketSansMedieum';
-    padding: 20px 10px 10px 10px;
+    padding: 10px;
 }
 
 /* section2 */
@@ -267,6 +281,7 @@ body {
     padding: 10px;
     font-size: 15px;
     margin-right: 10px;
+    min-width: 65px;
 }
 
 .section2 .mission_list .m_btn {
@@ -278,7 +293,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 15px;
     font-family: 'GmarketSansBold';
     font-size: 12px;
     min-width: 100px;
