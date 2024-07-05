@@ -22,8 +22,6 @@ function getMissions() {
 
   // connect
   connect.forEach((data) => {
-    console.log(data.type);
-
     if (isLogin === "true") {
       switch (data.type) {
         case "metamask":
@@ -52,8 +50,6 @@ function getMissions() {
           }
         </div>
       `;
-
-      console.log("rrwerew", taskButton);
     } else {
       connectTask += `
         <div>
@@ -73,8 +69,6 @@ function getMissions() {
 
   //twitter
   twitter.forEach((data) => {
-    console.log("twitter::", data);
-
     if (isLogin === "true") {
       let taskButton = ``;
 
@@ -123,8 +117,6 @@ function getMissions() {
 
   // discord
   discord.forEach((data) => {
-    console.log("discord::", data);
-
     if (isLogin === "true") {
       let taskButton = ``;
 
@@ -168,8 +160,6 @@ function getMissions() {
   $(".mission_list.discord").append(dicoTask);
 
   invite.forEach((data) => {
-    console.log("invite::", data);
-
     if (isLogin === "true") {
       inviteTask += `
         <div>
@@ -326,7 +316,6 @@ async function attendance() {
     console.log("signature::", signature);
   } else {
     signature = localStorage.getItem("metaSignature");
-    console.log(1);
   }
 
   var sign = signature.substring(2);

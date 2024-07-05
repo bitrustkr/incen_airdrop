@@ -35,11 +35,9 @@ $(document).ready(function () {
 
   // 클립보드 복사 이벤트
   $(".copy_to_clipboard").click(function (event) {
-    console.log("copy_to_clipboard");
     event.preventDefault();
     var copyText = $(this).data("copy-text");
 
-    console.log(copyText);
     copyToClipboard(copyText);
     $("#confirm").css("display", "block");
     $("#confirm .title").append("Copied to clipboard: " + copyText);
@@ -59,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const codeElements = document.querySelectorAll(".code");
 
   codeElements.forEach(function (element) {
-    if (element.textContent.trim() !== "please login") {
+    if (element.textContent.trim() !== "Please Login") {
       element.classList.add("black");
     }
   });

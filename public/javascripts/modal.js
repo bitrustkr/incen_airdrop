@@ -285,8 +285,6 @@ $(document).ready(function () {
 
 // join homepage
 function joinHompage(id, link) {
-  console.log(12312);
-
   axios.post(link, { missionNum: id }).then(function (res) {
     if (res.data.result) {
       window.open(res.data.url);
@@ -294,25 +292,6 @@ function joinHompage(id, link) {
     }
   });
 }
-// function joinHompage(id, link) {
-//   let isLogin = getIsLogin();
-
-//   if (!isLogin || isLogin === "false") {
-//     signTwitter();
-//   } else {
-//     axios.post(link, { missionNum: id }).then(function (res) {
-//       if (res.data.result) {
-//         window.open(res.data.url);
-//         $("#confirm").css("display", "block");
-//         let completeMsg = $("<span>Misstion Complete !</span>");
-//         $(".title").append(completeMsg);
-//       } else {
-//         $("#error").css("display", "block");
-//         $("#error .title").append(res.data.message);
-//       }
-//     });
-//   }
-// }
 
 // get Login state
 function getIsLogin() {
@@ -595,8 +574,6 @@ function connectTelegram() {
 
 // Discord 연동
 function connectDiscord() {
-  console.log("connectDiscord");
-
   // 요청이 성공일 경우 copybtn으로 ui변경 및 완료 팝업
   if (true) {
     localStorage.setItem("discordInfo", "Ox123...1234");
