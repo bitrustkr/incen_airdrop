@@ -385,4 +385,26 @@ $(document).ready(function () {
     $("#confirm .coin").append(`<img src="/img/coin.png" alt="">`);
     $("#confirm .title").append(`<p>Error!</p><p>${message}</p<>`);
   }
+
+  if (modalParam === "popup") {
+    const params = new URLSearchParams(window.location.search);
+    const link = params.get("link");
+    const newWin = window.open("", "", "width=1,height=1");
+
+    if (!newWin || newWin.closed || typeof newWin.closed == "undefined") {
+      //팝업 허용 x : 모달 띄우고 링크 표기
+      $("#confirm").css("display", "block");
+      $("#confirm .coin").append(`<img src="/img/warning.png" alt="">`);
+      $("#confirm .title").append(
+        `<p style="font-size:18px">Please allow pop-up, and click on the link</p>
+        <a href="${link}" target='_blank' class="popuplink">${link}</a>`
+      );
+    } else {
+      //팝업 허용 o : 링크 새탭
+      window.open(link, "_blank");
+      $("#confirm").css("display", "block");
+      $("#confirm .coin").append(`<img src="/img/coin.png" alt="">`);
+      $("#confirm .title").append("COMPLETE!");
+    }
+  }
 });

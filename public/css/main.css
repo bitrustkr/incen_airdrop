@@ -28,6 +28,7 @@ body {
 .app_content_wrap {
     width: 100%;
     background: #fff;
+    padding: 20px;
 }
 
 /* section1 */
@@ -82,6 +83,10 @@ body {
     height: 330px;
     border-radius: 20px;
     border: 15px solid #FFD543;
+}
+
+.section1 .sction_main_wrap .usr_wrap>div img {
+    width: 95%;
 }
 
 .section1 .tit_wrap .tit {
@@ -296,7 +301,7 @@ body {
     padding: 15px;
     font-family: 'GmarketSansBold';
     font-size: 12px;
-    min-width: 100px;
+    min-width: 105px;
     cursor: pointer;
 }
 
@@ -307,7 +312,7 @@ body {
 
 .section2 .mission_list .m_btn.completed {
     background: #bbb;
-    color: #fff
+    color: #fff;
 }
 
 @media (max-width: 768px) {
@@ -322,6 +327,10 @@ body {
     .app_content_wrap_border,
     .app_content_wrap {
         width: 100%;
+    }
+
+    .app_content_wrap {
+        padding: 10px;
     }
 
     .app_content_wrap_border {
@@ -366,6 +375,8 @@ body {
 
     .section1 .my_refer_wrap .refer .oncopy {
         font-family: 'GmarketSansBold';
+        min-width: 50px;
+        text-align: center;
         padding: 0 8px;
         height: 85%;
         right: 2px;
@@ -451,9 +462,12 @@ body {
         padding: 0;
     }
 
-    .section2 .mission_list .poin,
-    .section2 .mission_list .left>div {
+    .section2 .mission_list .poin {
         font-size: 10px;
+    }
+
+    .section2 .mission_list .left>div {
+        font-size: 12px;
     }
 }
 

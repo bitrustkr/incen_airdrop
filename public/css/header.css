@@ -38,9 +38,16 @@
 }
 
 .app-header .left_contens .tit {
-    font-weight: bold;
-    font-size: 24px;
+    font-family: 'GmarketSansMedieum';
+    font-size: 18px;
     padding: 0 0 0 20px;
+    min-height: 100%;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.app-header .left_contens .tit:hover {
+    font-family: 'GmarketSansBold';
 }
 
 /* right */
@@ -197,7 +204,7 @@
     }
 
     .app-header .left_contens {
-        flex-direction: column;
+        /* flex-direction: column; */
     }
 
     .app-header .left_contens .logo {
@@ -217,8 +224,8 @@
     .app-header .right_contents .login_sec .loginInfo {
         all: unset;
         position: relative;
-        width: 180px;
-        min-width: 170px;
+        width: 125px;
+        min-width: 100px;
         height: 40px;
         display: flex;
         justify-content: end;
@@ -253,10 +260,11 @@
     }
 
     .app-header .hide {
-        bottom: -300px;
+        width: 155px;
+        bottom: -250px;
     }
 
     .app-header .hide .menu_sec a {
-        padding: 10px;
+        padding: 10px 10px 10px 40px;
     }
 }

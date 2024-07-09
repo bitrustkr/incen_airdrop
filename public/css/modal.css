@@ -394,6 +394,14 @@
     cursor: pointer;
 }
 
+/* script */
+.popuplink {
+    font-size: 15px;
+    cursor: pointer;
+    color: #ffd527;
+    margin-top: 5px;
+}
+
 @media (max-width: 425px) {
     #dailyCheckIn .modal-content {
         background-size: contain;
