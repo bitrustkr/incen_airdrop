@@ -233,7 +233,7 @@ router.get(
 
         req.session.passport.user.point = req.session.passport.user.point + missionRst[0].point;
 
-        url = '/twitterSuccess?url=' + encodeURIComponent('https://twitter.com/intent/like?tweet_id=' + missionRst[0].value);
+        url = '/?modal=popup&link=' + encodeURIComponent('https://twitter.com/intent/like?tweet_id=' + missionRst[0].value);
 
     } catch(error){
         console.log(error);
@@ -377,7 +377,7 @@ router.get(
 
         req.session.passport.user.point = req.session.passport.user.point + missionRst[0].point;
 
-        url = '/twitterSuccess?url=' + encodeURIComponent('https://twitter.com/intent/retweet?tweet_id=' + missionRst[0].value);
+        url = '/?modal=popup&link=' + encodeURIComponent('https://twitter.com/intent/retweet?tweet_id=' + missionRst[0].value);
     } catch(error){
         console.log(error);
         if(con != undefined){
@@ -517,7 +517,7 @@ router.get(
 
         req.session.passport.user.point = req.session.passport.user.point + missionRst[0].point;
 
-        url = '/twitterSuccess?url=' + encodeURIComponent('https://twitter.com/intent/follow?user_id=' + missionRst[0].value);
+        url = '/?modal=popup&link=' + encodeURIComponent('https://twitter.com/intent/follow?user_id=' + missionRst[0].value);
 
     } catch(error){
         console.log(error);

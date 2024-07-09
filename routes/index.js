@@ -103,12 +103,6 @@ router.get("/", async (req, res) => {
   res.render("index", { isLogin: req.isAuthenticated(), user: user, mission : mission, attd : attd });
 });
 
-// twitterSuccess
-router.get("/twitterSuccess", async (req, res) => {
-  
-  res.render("twitterSuccess");
-});
-
 // test
 router.get("/test", async (req, res) => {
 
