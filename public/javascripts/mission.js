@@ -391,6 +391,9 @@ $(document).ready(function () {
     const link = params.get("link");
     const newWin = window.open("", "", "width=1,height=1");
 
+    $(".btn.close").remove();
+    $(".btn.confirm").html("Close");
+
     if (!newWin || newWin.closed || typeof newWin.closed == "undefined") {
       //팝업 허용 x : 모달 띄우고 링크 표기
       $("#confirm").css("display", "block");

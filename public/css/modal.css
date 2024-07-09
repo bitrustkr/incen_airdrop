@@ -177,14 +177,17 @@
 }
 
 #confirm .btn_wrap .btn {
-    background: #ffd527;
-    color: #fff;
     font-weight: bold;
     border-radius: 10px;
     padding: 10px;
     text-align: center;
     margin-bottom: 10px;
     cursor: pointer;
+}
+
+#confirm .btn_wrap .btn.confirm {
+    background: #ffd527;
+    color: #fff;
 }
 
 #confirm .btn_wrap .btn.close {
