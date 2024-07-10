@@ -1,6 +1,6 @@
 /* 모달 스타일 */
 .modal {
-    display: none;
+    /* display: none; */
     position: fixed;
     z-index: 150;
     left: 0;
@@ -395,6 +395,64 @@
     top: 0;
     padding: 10px;
     cursor: pointer;
+}
+
+/* leaderboard */
+#leaderboard .modal-content {
+    background: #ffd527;
+    border-radius: 5px;
+}
+
+#leaderboard .ranker_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+}
+
+#leaderboard .ranker_wrap>div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+}
+
+#leaderboard .ranker_wrap>div:nth-child(1) {
+    width: 95%;
+    left: 10px;
+    z-index: -1;
+}
+
+#leaderboard .ranker_wrap>div:nth-child(3) {
+    width: 95%;
+    right: 10px;
+    z-index: -1;
+}
+
+#leaderboard .ranker_wrap .tiara {
+    position: absolute;
+    max-width: 100px;
+    top: -40px;
+}
+
+#leaderboard .challenger_wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+#leaderboard .challenger_wrap>div {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    margin: 5px;
+    padding: 20px 10px;
+}
+
+#leaderboard .challenger_info {
+    display: flex;
+    align-items: center;
 }
 
 /* script */
