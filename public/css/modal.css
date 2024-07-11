@@ -1,6 +1,6 @@
 /* 모달 스타일 */
 .modal {
-    /* display: none; */
+    display: none;
     position: fixed;
     z-index: 150;
     left: 0;
