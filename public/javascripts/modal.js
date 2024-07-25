@@ -192,6 +192,78 @@ function openCoponCodeInput(id) {
   selectedId = id;
 }
 
+//open rank input
+function openRanking() {
+  $("#leaderboard").css("display", "block");
+  document.querySelector(".challenger_wrap").innerHTML = "";
+  document.querySelector(".my_rank").innerHTML = "";
+
+  axios.post("/users/ranking").then(function (res) {
+    console.log(res);
+
+    const rankings = res.data.ranking;
+
+    for (let i = 0; i < 3; i++) {
+      if (rankings[i]) {
+        const rankHTML = `
+          <div>
+            <div class="num ${i === 0 ? "tiara" : ""}">
+              ${i === 0 ? '<img src="/img/tiara.svg" alt=""/>' : i + 1}
+            </div>
+            <div class="main_img">
+              <img src="/img/winner.png" alt=""/>
+              <div class="profile_img">
+                <img src=${rankings[i].profile_image_url} alt=""/>
+              </div>
+            </div>
+            <div class="uid">${rankings[i].name}</div>
+            <div class="point">${rankings[i].point}</div>
+          </div>
+        `;
+        document.getElementById(`rank_${i + 1}`).innerHTML = rankHTML;
+      }
+    }
+
+    const challengerWrap = document.querySelector(".challenger_wrap");
+    for (let i = 3; i < rankings.length; i++) {
+      const challengerHTML = `
+        <div>
+          <div class="challenger_info">
+            <div class="num">${rankings[i].rank}</div>
+            <div class="user_img">
+              <img src=${rankings[i].profile_image_url} alt=""/>
+            </div>
+            <div class="uid">${rankings[i].name}</div>
+          </div>
+          <div class="challenger_point">${rankings[i].point}</div>
+        </div>
+      `;
+      challengerWrap.innerHTML += challengerHTML;
+    }
+
+    const myRank = document.querySelector(".my_rank");
+    const myRankHTML = `
+        <div>
+          <div class="challenger_info">
+            <div class="num">${res.data.userRanking.rank}</div>
+            <div class="user_img">
+              <img src=${res.data.userRanking.profile_image_url} alt=""/>
+            </div>
+            <div class="uid">${res.data.userRanking.name}</div>
+          </div>
+          <div class="challenger_point">${res.data.userRanking.point}</div>
+        </div>
+      `;
+
+    myRank.innerHTML += myRankHTML;
+  });
+}
+
+// close rank
+function closeRanking() {
+  $("#leaderboard").css("display", "none");
+}
+
 //request coupon
 function confirmCoupon() {
   var coupon = $("#coupon").val();
@@ -350,7 +422,6 @@ $(document).ready(function () {
   }
 });
 
-//-------------------------------------------------------------------
 // 로그인
 async function signTwitter() {
   const urlParams = new URLSearchParams(window.location.search);

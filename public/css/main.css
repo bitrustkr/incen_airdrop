@@ -85,10 +85,23 @@ body {
     border: 15px solid #FFD543;
     font-size: 50px;
     font-family: 'GmarketSansBold';
+    position: relative;
 }
 
-.section1 .sction_main_wrap .usr_wrap>div img {
+.section1 .sction_main_wrap .usr_wrap>div img,
+.section1 .sction_main_wrap .usr_wrap .tiara>img {
     width: 95%;
+}
+
+.section1 .sction_main_wrap .usr_wrap .tiara {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #FFD543;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 100%;
+    cursor: pointer;
 }
 
 .section1 .tit_wrap .tit {
@@ -403,6 +416,12 @@ body {
         width: 100%;
     }
 
+    .section1 .sction_main_wrap .usr_wrap .tiara {
+        width: 50px;
+        height: 50px;
+        padding: 5px
+    }
+
     .section1 .tit_wrap .tit,
     .section1 .tit_wrap .sub_tit {
         font-size: 15px;
@@ -474,31 +493,26 @@ body {
 }
 
 /* 세로 스크롤바 */
-/* body::-webkit-scrollbar,
+body::-webkit-scrollbar,
 .mission_list::-webkit-scrollbar,
-.content_item::-webkit-scrollbar {
+.content_item::-webkit-scrollbar,
+.challenger_wrap::-webkit-scrollbar {
     width: 8px;
     border-radius: 4px;
 }
 
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb,
+.challenger_wrap::-webkit-scrollbar-thumb {
     background-color: #1B191E;
     border-radius: 4px;
 }
 
-.mission_list::-webkit-scrollbar-thumb,
-.content_item::-webkit-scrollbar-thumb {
-    background-color: #FF9900;
+.challenger_wrap::-webkit-scrollbar-thumb {
+    background-color: #1B191E;
     border-radius: 4px;
 }
 
-.mission_list::-webkit-scrollbar-track,
-.content_item::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-    border-radius: 4px;
-}
-
-body::-webkit-scrollbar-track {
+.challenger_wrap::-webkit-scrollbar-track {
     background-color: #555555;
     border-radius: 4px;
-} */
+}

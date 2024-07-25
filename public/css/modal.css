@@ -419,6 +419,24 @@
     padding: 30px 0;
 }
 
+#leaderboard .main_img {
+    position: relative;
+}
+
+#leaderboard .profile_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    width: 95%;
+}
+
+#leaderboard .profile_img>img {
+    width: 100%;
+    border-radius: 100%;
+}
+
 #leaderboard .ranker_wrap>div:nth-child(1) {
     width: 95%;
     left: 10px;
@@ -433,26 +451,89 @@
 
 #leaderboard .ranker_wrap .tiara {
     position: absolute;
-    max-width: 100px;
+    /* max-width: 100px; */
     top: -40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#leaderboard .ranker_wrap .tiara>img {
+    width: 50%;
+    z-index: 10;
+}
+
+#leaderboard .uid {
+    text-align: center;
+    font-family: 'GmarketSansMedieum';
+    padding: 10px 0;
+}
+
+#leaderboard .point,
+#leaderboard .num,
+#leaderboard .challenger_point {
+    text-align: center;
+    font-family: 'GmarketSansBold';
+    font-size: 20px;
+}
+
+#leaderboard .challenger_point {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#leaderboard .user_img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin: 0 10px;
+    overflow: hidden;
+}
+
+#leaderboard .user_img>img {
+    width: 100%;
 }
 
 #leaderboard .challenger_wrap {
     display: flex;
     flex-direction: column;
+    max-height: 400px;
+    overflow-y: scroll;
 }
 
 #leaderboard .challenger_wrap>div {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    padding: 10px;
     background: #fff;
-    margin: 5px;
-    padding: 20px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#leaderboard .my_rank {
+    border: 3px solid #000;
+    border-radius: 10px;
+}
+
+#leaderboard .my_rank>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 #leaderboard .challenger_info {
     display: flex;
     align-items: center;
+}
+
+#leaderboard .leaderboard_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
 }
 
 /* script */
@@ -521,4 +602,35 @@
     #code .modal-content .tit {
         font-size: 18px;
     }
+
+    #leaderboard .modal-content {
+        width: 95%;
+    }
+
+    #leaderboard .ranker_wrap {
+        padding: 10px 0;
+    }
+
+    #leaderboard .ranker_wrap>div {
+        padding: 0;
+    }
+
+    #leaderboard .uid {
+        font-size: 12px;
+    }
+
+    #leaderboard .point,
+    #leaderboard .num,
+    #leaderboard .challenger_point {
+        font-size: 15px;
+    }
+
+    /* #leaderboard .ranker_wrap>div:nth-child(1),
+    #leaderboard .ranker_wrap>div:nth-child(3) {
+        width: 25%;
+    }
+
+    #leaderboard .ranker_wrap>div:nth-child(2) {
+        width: 50%;
+    } */
 }
