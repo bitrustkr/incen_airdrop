@@ -50,4 +50,61 @@ router.get("/logout", (req, res) => {
   });
 });
 
+// ranking
+router.post('/ranking', async function(req, res, next) {
+  var result = {
+      result : false
+  }
+
+  try{
+      var qry = `
+          SELECT
+              \`name\`, \`point\`, \`rank\`
+          FROM
+              point_rank
+          ORDER BY \`rank\`
+      `;
+      var params = [];
+      var rankingRst = await db.dbQuery(qry, params);
+
+      var userRanking;
+
+      if (req.isAuthenticated()) {
+        qry = `
+          SELECT
+              \`name\`, \`point\`, \`rank\`
+          FROM
+              point_rank
+          WHERE user_id = ?
+        `;
+        params = [req.user.id];
+        var userRst = await db.dbQuery(qry, params);
+  
+        if(userRst.length > 0){
+          userRanking = userRst[0];
+        }else{
+          userRanking = {
+            name : req.user.name,
+            point : req.user.point,
+            rank : '100+'
+          }
+        }
+      }
+      
+      result = {
+          result : true,
+          ranking : rankingRst,
+          userRanking : userRanking
+      }
+
+  } catch(error) {
+      console.log(error);
+      if(con != undefined){
+          await db.transRollback(con);
+      }
+  }
+
+  res.json(result);
+});
+
 module.exports = router;

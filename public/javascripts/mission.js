@@ -238,7 +238,7 @@ async function attendance() {
   }
 
   var signature;
-  var contractAddr = "0x9d42388a4141440e02dc36c415e2045a64a5af76";
+  var contractAddr = "0x44CfB2fEa7361d299D32d9Ac579FD9640eB5F0Ba";
   try {
     web3 = new Web3(web3.currentProvider);
   } catch (error) {
@@ -295,7 +295,7 @@ async function attendance() {
         ],
       },
       domain: {
-        name: "1.234.112.72",
+        name: "211.215.74.85",
         version: "1",
         chainId: chainId,
         verifyingContract: contractAddr, // 사용할 컨트랙트 주소 입력 마켓컨트랙트, 라우터컨트랙트

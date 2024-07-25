@@ -9,7 +9,7 @@
   <h1>INCN</h1>
   <h1><%= isLogin %></h1>
   <% if(isLogin) { %>
-    <h3>referral : http://1.234.112.72:3784?referral=<%= user.id %></h3>
+    <h3>referral : http://211.215.74.85:3784?referral=<%= user.id %></h3>
     <h3>twitter id : <%= user.twitter_id %></h3>
     <h3>discord id : <%= user.discord_id %></h3>
     <h3>address : <%= user.address %></h3>
@@ -22,6 +22,9 @@
     <a href = "/users/login">log in</a><br/>
     <script>const loginAddr = ""; </script>
   <% } %>
+  <br/>
+  <br/>
+  <button type="button" onclick="javascript:ranking();">ranking</button>
   <br/>
   <br/>
   <h1>attendance info</h1>

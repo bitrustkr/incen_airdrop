@@ -143,7 +143,7 @@ async function connectMetamask() {
     return;
   }
 
-  let contractAddr = "0x9d42388a4141440e02dc36c415e2045a64a5af76";
+  let contractAddr = "0x44CfB2fEa7361d299D32d9Ac579FD9640eB5F0Ba";
   let chainId = 5611;
   const currentNetworkId = await ethereum.request({ method: "net_version" });
 
@@ -193,7 +193,7 @@ async function connectMetamask() {
       ],
     },
     domain: {
-      name: "1.234.112.72",
+      name: "211.215.74.85",
       version: "1",
       chainId: chainId,
       verifyingContract: contractAddr, // 사용할 컨트랙트 주소 입력 마켓컨트랙트, 라우터컨트랙트
@@ -242,7 +242,7 @@ async function connectMetamask() {
 
 async function attendance() {
   var signature;
-  var contractAddr = "0x9d42388a4141440e02dc36c415e2045a64a5af76";
+  var contractAddr = "0x44CfB2fEa7361d299D32d9Ac579FD9640eB5F0Ba";
   try {
     web3 = new Web3(web3.currentProvider);
   } catch (error) {
@@ -299,7 +299,7 @@ async function attendance() {
         ],
       },
       domain: {
-        name: "1.234.112.72",
+        name: "211.215.74.85",
         version: "1",
         chainId: chainId,
         verifyingContract: contractAddr, // 사용할 컨트랙트 주소 입력 마켓컨트랙트, 라우터컨트랙트
@@ -363,4 +363,34 @@ async function attendance() {
   } else {
     console.log("error::", rst.data.message);
   }
+}
+
+/*
+
+response
+{
+  result : bool,
+  ranking : [{"name":"nohyunzee","point":142,"rank":1},{"name":"InyongMmd","point":40,"rank":2},{"name":"HNR6853","point":29,"rank":3},{"name":"0xKylie__","point":23,"rank":4},{"name":"asdasdaaa","point":21,"rank":5},{"name":"071labsTool","point":9,"rank":7},{"name":"0xdokdo","point":8,"rank":8},{"name":"0xHoneyFist_","point":4,"rank":9},{"name":"noyunji1462662","point":0,"rank":10},{"name":"0xYeJh","point":0,"rank":10}],
+  userRanking : 아래 참고
+}
+
+----------------------------------------
+userRanking : 로그인한 사용자의 랭킹 정보
+100위 내에 있을 경우
+"userRanking":{"name":"YongIn58591","point":10,"rank":"6"
+
+100위 내에 없을 경우
+"userRanking":{"name":"YongIn58591","point":10,"rank":"100+"
+
+로그인 안했을 경우에는 데이터 없음
+----------------------------------------
+
+
+*/
+function ranking() {
+  axios
+    .post("/users/ranking")
+    .then(function (response) {
+      alert(JSON.stringify(response.data));
+    });
 }

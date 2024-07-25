@@ -281,7 +281,7 @@ router.post("/attendance", async (req, res, next) => {
         return res.json(result);
     }
 
-    if(transaction.from != req.user.address || transaction.to != process.env.ATTENDANCE_CONTRACT){
+    if(transaction.from.toLowerCase() != req.user.address.toLowerCase() || transaction.to.toLowerCase() != process.env.ATTENDANCE_CONTRACT.toLowerCase()){
         console.log('transaction validation false');
         console.log(req.user.address);
         console.log(process.env.ATTENDANCE_CONTRACT);
