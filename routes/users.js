@@ -59,7 +59,7 @@ router.post('/ranking', async function(req, res, next) {
   try{
       var qry = `
           SELECT
-              \`name\`, \`point\`, \`rank\`
+              \`name\`, \`point\`, \`rank\`, \`profile_image_url\`
           FROM
               point_rank
           ORDER BY \`rank\`
@@ -72,7 +72,7 @@ router.post('/ranking', async function(req, res, next) {
       if (req.isAuthenticated()) {
         qry = `
           SELECT
-              \`name\`, \`point\`, \`rank\`
+              \`name\`, \`point\`, \`rank\`, \`profile_image_url\`
           FROM
               point_rank
           WHERE user_id = ?
@@ -86,6 +86,7 @@ router.post('/ranking', async function(req, res, next) {
           userRanking = {
             name : req.user.name,
             point : req.user.point,
+            profile_image_url : req.user.profile_image_url,
             rank : '100+'
           }
         }

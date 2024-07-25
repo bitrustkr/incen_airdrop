@@ -43,7 +43,7 @@ router.get(
         console.log('/twitter/signUp/redirect ::: tokenResp');
         console.log(tokenResp.data);
       
-        var resp = await axios.get('https://api.twitter.com/2/users/me', {
+        var resp = await axios.get('https://api.twitter.com/2/users/me?user.fields=profile_image_url', {
           headers: { 
               'Content-Type': 'application/x-www-form-urlencoded', 
               'Authorization': `Bearer ` + tokenResp.data.access_token
@@ -58,6 +58,7 @@ router.get(
         req.body.name = resp.data.data.name;
         req.body.username = resp.data.data.username;
         req.body.referral = referral;
+        req.body.profile_image_url = resp.data.data.profile_image_url;
 
         //localstrategy를 찾아 실행한다.
         passport.authenticate('twitter', (authError, user, info) => {

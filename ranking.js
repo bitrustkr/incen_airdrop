@@ -31,7 +31,7 @@ async function ranking(){
         qry = `
             INSERT INTO
                 \`point_rank\`
-            (\`user_id\`, \`name\`, \`point\`, \`rank\`)
+            (\`user_id\`, \`name\`, \`profile_image_url\`, \`point\`, \`rank\`)
             VALUES
         `;
 
@@ -45,7 +45,7 @@ async function ranking(){
             }
             
             qry += comma + `
-                (\'${userRst[i].id}\', \'${userRst[i].name}\', ${userRst[i].point}, ${rank})
+                (\'${userRst[i].id}\', \'${userRst[i].name}\', \'${userRst[i].profile_image_url}\', ${userRst[i].point}, ${rank})
             `;
 
             comma = ',';

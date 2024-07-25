@@ -18,7 +18,8 @@ router.get("/", async (req, res) => {
       address: req.user.address,
       twitter_id: req.user.twitter_id,
       discord_id: req.user.discord_id,
-      point: req.user.point
+      point: req.user.point,
+      profile_image_url: req.user.profile_image_url
     };
 
     userId = req.user.id;
@@ -120,7 +121,8 @@ router.get("/test", async (req, res) => {
       address: req.user.address,
       twitter_id: req.user.twitter_id,
       discord_id: req.user.discord_id,
-      point: req.user.point
+      point: req.user.point,
+      profile_image_url: req.user.profile_image_url
     };
 
     userId = req.user.id;

@@ -6,7 +6,7 @@ var Web3Utils = require('web3-utils');
 // done(null, {id: user.id, point: user.point, provider: user.provider, provider_id: user.provider_id, email: user.email, name: user.given_name})로 세션을 초기화 한다.
 passport.serializeUser(function (user, done) {
     // done(null, {id: user.id, point: user.point, provider: user.provider, address: user.address});
-    done(null, {id: user.id, twitter_id: user.provider_id, name: user.name, address: user.address, discord_id: user.discord_id, point: user.point, token: user.token});
+    done(null, {id: user.id, twitter_id: user.provider_id, name: user.name, address: user.address, discord_id: user.discord_id, point: user.point, token: user.token, profile_image_url: user.profile_image_url});
 });
 
 // 사용자가 페이지를 방문할 때마다 호출되는 함수
@@ -205,7 +205,22 @@ passport.use(
                             INSERT INTO 
                                 users
                             (
-                                provider, provider_id, name, referral_id
+                                provider, provider_id, name, referral_id, profile_image_url
+                            )
+                            VALUES
+                            (
+                                ?, ?, ?, ?, ?
+                            )
+                        `;
+    
+                        params = ['twitter', req.body.id, req.body.username, referral, req.body.profile_image_url];
+                    }else{
+                    
+                        qry = `
+                            INSERT INTO 
+                                users
+                            (
+                                provider, provider_id, name, profile_image_url
                             )
                             VALUES
                             (
@@ -213,22 +228,7 @@ passport.use(
                             )
                         `;
     
-                        params = ['twitter', req.body.id, req.body.username, referral];
-                    }else{
-                    
-                        qry = `
-                            INSERT INTO 
-                                users
-                            (
-                                provider, provider_id, name
-                            )
-                            VALUES
-                            (
-                                ?, ?, ?
-                            )
-                        `;
-    
-                        params = ['twitter', req.body.id, req.body.username];
+                        params = ['twitter', req.body.id, req.body.username, req.body.profile_image_url];
                     }
 
                     rst = await db.dbQuery(qry, params);
@@ -277,6 +277,20 @@ passport.use(
                             return done(null, false, { message: 'DB INSERT ERROR.' });
                         }
                     }
+                }else{
+                    qry = `
+                        UPDATE users
+                        SET profile_image_url = ?
+                        WHERE 
+                            provider = 'twitter'
+                            AND provider_id = ?
+                    `;
+
+                    params = [req.body.profile_image_url, req.body.id];
+
+                    await db.dbQuery(qry, params);
+                  
+                    console.log('update users profile_image_url');
                 }
 
                 console.log(req.body.id);
@@ -284,6 +298,7 @@ passport.use(
                 console.log(req.body.username);
 
                 rst[0].token = req.body.access_token
+                rst[0].profile_image_url = req.body.profile_image_url
 
                 return done(null, rst[0]);
             } catch (error) {
