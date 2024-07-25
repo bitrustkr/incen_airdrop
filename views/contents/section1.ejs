@@ -12,7 +12,11 @@
 
         <div class="usr_wrap">
             <div>
-                <img src="/img/coin.png" alt=""/>
+                <% if(isLogin){ %>
+                    <%= user.point %>
+                <% } else { %>
+                    <img src="/img/coin.png" alt=""/>
+                <% } %> 
             </div>
         </div>
     </div>

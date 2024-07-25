@@ -249,6 +249,19 @@ async function attendance() {
     return;
   }
 
+  // 잔액 확인 추가
+  const account = ethereum.selectedAddress;
+  const balance = await web3.eth.getBalance(account);
+  const minBalance = web3.utils.toWei("0.001", "ether");
+
+  if (balance < minBalance) {
+    $("#confirm").css("display", "block");
+    $("#confirm .title").append(
+      "Insufficient balance in MetaMask. Please add more funds."
+    );
+    return;
+  }
+
   let chainId = 5611;
   const currentNetworkId = await ethereum.request({ method: "net_version" });
 

@@ -83,6 +83,8 @@ body {
     height: 330px;
     border-radius: 20px;
     border: 15px solid #FFD543;
+    font-size: 50px;
+    font-family: 'GmarketSansBold';
 }
 
 .section1 .sction_main_wrap .usr_wrap>div img {
