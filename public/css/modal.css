@@ -401,6 +401,7 @@
 #leaderboard .modal-content {
     background: #ffd527;
     border-radius: 5px;
+    max-width: 600px;
 }
 
 #leaderboard .ranker_wrap {
