@@ -627,6 +627,10 @@
         font-size: 12px;
     }
 
+    #leaderboard .uid.ranker {
+        padding: 0 10px 10px 10px;
+    }
+
     #leaderboard .point,
     #leaderboard .num,
     #leaderboard .challenger_point {
@@ -634,7 +638,7 @@
     }
 
     #leaderboard .ranker_wrap .tiara {
-        top: 35px
+        top: -35px
     }
 
     #leaderboard .ranker_wrap>div {

@@ -199,8 +199,6 @@ function openRanking() {
   document.querySelector(".my_rank").innerHTML = "";
 
   axios.post("/users/ranking").then(function (res) {
-    console.log(res);
-
     const rankings = res.data.ranking;
 
     for (let i = 0; i < 3; i++) {
@@ -216,7 +214,7 @@ function openRanking() {
                 <img src=${rankings[i].profile_image_url} alt=""/>
               </div>
             </div>
-            <div class="uid">${rankings[i].name}</div>
+            <div class="uid ranker">${rankings[i].name}</div>
             <div class="point">${rankings[i].point}</div>
           </div>
         `;
@@ -436,8 +434,6 @@ async function signTwitter() {
 
 //로그아웃
 function disconnectTwitter() {
-  console.log("disconnectTwitter");
-
   localStorage.removeItem("metaSignature");
   location.href = "/users/logout";
 }
@@ -634,8 +630,6 @@ async function connectMetamask() {
 
 // Telegram 연동
 function connectTelegram() {
-  console.log("connectTelegram");
-
   // 요청이 성공일 경우 copybtn으로 ui변경 및 완료 팝업
   if (true) {
     localStorage.setItem("telegramInfo", "Ox123...1234");

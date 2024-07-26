@@ -113,11 +113,19 @@
     right: -2px;
     width: 40px;
     height: 40px;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 1px solid #000;
 }
 
 .app-header .right_contents .login_sec .loginInfo .info {
-    line-height: 1px;
-    margin-left: 30px;
+    margin-left: 25px;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 23px;
+    display: block;
 }
 
 .app-header .hide {

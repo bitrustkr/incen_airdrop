@@ -4,21 +4,16 @@ const loginAddr = document
   .getAttribute("data-loginAddr");
 const isLogin = section2.getAttribute("data-login");
 
-// console.log(isLogin);
-// console.log(typeof isLogin);
-
 function getMissions() {
   let connect = JSON.parse(section2.getAttribute("data-connect"));
   let twitter = JSON.parse(section2.getAttribute("data-twitter"));
   let discord = JSON.parse(section2.getAttribute("data-discord"));
   let invite = JSON.parse(section2.getAttribute("data-invite"));
-  let test = JSON.parse(section2.getAttribute("data-test"));
 
   let connectTask = "";
   let tweetTask = "";
   let dicoTask = "";
   let inviteTask = "";
-  let testTask = "";
 
   // connect
   connect.forEach((data) => {
@@ -373,9 +368,17 @@ async function attendance() {
   }
 }
 
+function ranking() {
+  axios.post("/users/ranking").then(function (response) {
+    $(".smile img").attr("src", response.data.userRanking.profile_image_url);
+  });
+}
+
 $(document).ready(function () {
   if (isLogin !== "true") {
     localStorage.removeItem("metaSignature");
+  } else {
+    ranking();
   }
 
   getMissions();
