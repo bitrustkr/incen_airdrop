@@ -28,33 +28,35 @@ async function ranking(){
         params = [];
         await db.dbQuery(qry, params, con);
 
-        qry = `
-            INSERT INTO
-                \`point_rank\`
-            (\`user_id\`, \`name\`, \`profile_image_url\`, \`point\`, \`rank\`)
-            VALUES
-        `;
-
-        var beforePoint = 0;
-        var comma = '';
-        var rank = 0;
-        for(var i = 0; i < userRst.length && i < 100; i++){
-            if (i == 0 || beforePoint > userRst[i].point){
-                beforePoint = userRst[i].point;
-                rank = i + 1;
-            }
-            
-            qry += comma + `
-                (\'${userRst[i].id}\', \'${userRst[i].name}\', \'${userRst[i].profile_image_url}\', ${userRst[i].point}, ${rank})
-            `;
-
-            comma = ',';
-        }
-
-        qry += ';';
-
-        params = [];
-        await db.dbQuery(qry, params, con);
+		if(userRst.length > 0){
+			qry = `
+				INSERT INTO
+					\`point_rank\`
+				(\`user_id\`, \`name\`, \`profile_image_url\`, \`point\`, \`rank\`)
+				VALUES
+			`;
+	
+			var beforePoint = 0;
+			var comma = '';
+			var rank = 0;
+			for(var i = 0; i < userRst.length && i < 100; i++){
+				if (i == 0 || beforePoint > userRst[i].point){
+					beforePoint = userRst[i].point;
+					rank = i + 1;
+				}
+				
+				qry += comma + `
+					(\'${userRst[i].id}\', \'${userRst[i].name}\', \'${userRst[i].profile_image_url}\', ${userRst[i].point}, ${rank})
+				`;
+	
+				comma = ',';
+			}
+	
+			qry += ';';
+	
+			params = [];
+			await db.dbQuery(qry, params, con);
+		}
 
         await db.transEnd(con);
 
